@@ -9,9 +9,9 @@ TO INSTALL DEPENDENCES
 </code>
 
 TO START THE SERVER
-
-DEBUG=myapp ./bin/www
-
+<code>
+	DEBUG=myapp ./bin/www
+</code>
 For more info check
 <a href='http://expressjs.com/starter/generator.html'>
  this
