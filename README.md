@@ -1,6 +1,7 @@
 # Express-empty
 Empty js express project
-
+With working Modules:
+<a href='https://www.npmjs.com/package/pos'>POS</a> </br>
 
 
 TO INSTALL DEPENDENCES
