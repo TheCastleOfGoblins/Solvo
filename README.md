@@ -18,5 +18,10 @@ For more info check
 <a href='http://expressjs.com/starter/generator.html'>
  this
 
-</a> 
-.
+</a>.
+
+</br> 
+More info for jake template language: <a href="http://jade-lang.com/reference/"> here</a>.
+
+</br>
+More info for moongose: <a href="http://mongoosejs.com/docs/">here</a>.
