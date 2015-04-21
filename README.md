@@ -24,3 +24,9 @@ More info for jake template language: <a target="_blank" href="http://jade-lang.
 
 </br>
 More info for moongose: <a target="_blank" href="http://mongoosejs.com/docs/">here</a>.
+</br> 
+
+More info for google search: <a target="_blank" href="https://github.com/jprichardson/node-google">here</a>
+
+</br> 
+More info for geocoder: <a target="_blank" href="https://github.com/nchaulet/node-geocoder">here.</a>
