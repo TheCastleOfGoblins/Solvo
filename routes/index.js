@@ -2,6 +2,24 @@ var express = require('express');
 var router = express.Router();
 var Post = require('../models/post');
 var dbApi = require('../helpers/dbApi');
+var secrets = require('../secrets.json');
+
+var passport = require('passport')
+	, FacebookStrategy = require('passport-facebook').Strategy;
+		console.log('LOgin');
+	passport.use(new FacebookStrategy({
+	    clientID: secrets.facebook.appId,
+	    clientSecret: secrets.facebook.secret,
+	    callbackURL: "http://localhost:3000/auth/facebook/callback"
+	  },
+	  function(accessToken, refreshToken, profile, done) {
+	    //User.findOrCreate(..., function(err, user) {
+	    //  if (err) { return done(err); }
+	    //  done(null, user);
+	    //});
+		console.log(accessToken, refreshToken, profile);
+	  }
+	));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -23,7 +41,7 @@ router.get('/', function(req, res, next) {
 		var geocoderProvider = 'google';
 		var httpAdapter = 'https';
 		// optionnal
-		var secrets = require('../secrets.json')
+		
 		var extra = {
 		    apiKey: secrets.google.server, // for Mapquest, OpenCage, Google Premier
 		    formatter: null         // 'gpx', 'string', ...
@@ -38,10 +56,12 @@ router.get('/', function(req, res, next) {
 
 		res.render('index', { title: 'Express',links:links, taggedWords:taggedWords });
 	});
-	
-	
 });
+router.get('/auth/facebook', passport.authenticate('facebook'));
 
+router.get('/auth/facebook/callback', 
+  passport.authenticate('facebook', { successRedirect: '/',
+                                      failureRedirect: '/posts' }));
 
 
 
