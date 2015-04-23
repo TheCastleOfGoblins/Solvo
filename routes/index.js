@@ -23,7 +23,7 @@ var passport = require('passport')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
+	var request = require('request');
 	var pos = require('pos');
 	var words = new pos.Lexer().lex("The pos libary is working and it's fucking awesome.");
 	var taggedWords = new pos.Tagger().tag(words);
@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
 
 	google.resultsPerPage = 25
 	var nextCounter = 0
-
+	
 	google('node.js best practices', function (err, next, links){
 	  if (err) console.error(err)
 
