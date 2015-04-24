@@ -6,7 +6,17 @@ var dbApi = require('../helpers/dbApi');
 
 
 router.get('/list/:userId', function(req, res, next) {
-	res.json({ user: req.params.userId, a: req.query.a });
+	dbApi.openConnection(function(db){
+		Todo.find({ userId: req.params.userId, isResolved: false }, function(err, todos){
+			/*var str = [];
+			todos.forEach(function(todo) {
+				str.push();
+			});*/
+			//res.json(todos/*.map(function(todo){ return todo.showTodo(); })*/);
+			res.render('todo', { title: 'Express', todos: todos, userId: req.params.userId });
+			db.close();
+		});
+	});
 });
 
 
@@ -20,7 +30,7 @@ router.post('/resolve', function(req, res, next) {
 		Todo.update(
 			{ _id: req.body.todoId, userId: req.body.userId }, 
 			{ isResolved: true } , 
-			function(err, saved){
+			function(err, numAffected){
 				res.redirect('/todos/list/' + req.body.userId);
 				db.close();
 		});
