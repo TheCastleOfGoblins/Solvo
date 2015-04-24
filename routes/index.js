@@ -4,6 +4,7 @@ var Post = require('../models/post');
 var dbApi = require('../helpers/dbApi');
 var secrets = require('../secrets.json');
 var User = require('../models/user');
+var search = require('../data/search');
 
 var passport = require('passport')
 	, FacebookStrategy = require('passport-facebook').Strategy;
@@ -42,21 +43,22 @@ router.get('/', function(req, res, next) {
       formatter: null         // 'gpx', 'string', ...
   };
 
-		var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
+		//var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
 		// Using callback
-		geocoder.geocode('29 champs elysée paris', function(err, shat) {
-        console.log(shat);
+		//geocoder.geocode('29 champs elysée paris', function(err, shat) {
+        //console.log(shat);
 	
 	/*google('node.js best practices', function (err, next, links){
 	  if (err) console.error(err)
 
 		console.log(err,links[0],next);
 		});*/
-
-        res.render('index', { title: 'Express'/*,links:links*/ , taggedWords:taggedWords });
-    
-	});
+        //search.find("burger test",function(error, response, body){
+          //console.log(body);
+          res.render('index', { title: 'Express'/*,links:links*/ , taggedWords:taggedWords });
+        //});
+	//});
 });
 router.get('/auth/facebook', passport.authenticate('facebook'));
 
