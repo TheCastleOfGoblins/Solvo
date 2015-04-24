@@ -27,12 +27,10 @@ var todoSchema = mongoose.Schema({
 });
 
 todoSchema.methods.showTodo = function () {
-  console.log(
-  	  rawText + '/n' 
-  	+ isResolved + '/n'
-  	+ createdAt + '/n'
-  	+ userId + '/n'
-  );
+	return this.rawText + '\n' 
+		+ this.isResolved + '\n'
+  		+ this.createdAt + '\n'
+  		+ this.userId + '\n';
 }
 
 

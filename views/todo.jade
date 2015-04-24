@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  p List my To-Dos
+
+
+  table
+    each todo, index in #{todos}
+      tr
+        td index
+        td todo.rawText
+        td todo.createdAt
+        td
+          form(name="resolve#{todo._id}", action="resolve", method="post")
+            input(type="hidden", name='userId' value="#{userId}")
+            input(type="hidden", name='todoId' value="#{todo._id}")
+            input(type="submit", value="Resolve #{todo._id}")

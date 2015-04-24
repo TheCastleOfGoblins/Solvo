@@ -5,7 +5,7 @@ var postSchema = mongoose.Schema({
 });
 
 postSchema.methods.showPost = function () {
-  console.log(title + '/n' + content);
+  console.log(this.title + '\n' + this.content);
 }
 
 
