@@ -1,0 +1,129 @@
+body
+{
+	background:#FCF5EF;
+	color:#4A563A;
+	font-family: 'Ubuntu Condensed', sans-serif;
+}
+h3
+{
+	font-size:1.2em;
+}
+a
+{
+	color:#44408E;
+	font-weight:bold;
+}
+a[target='_modal']:after
+{
+	content:' ';
+	display:inline-block;
+	width:1em;
+	height:1em;
+	background:url('popout.png');
+	background-size: 100%; 100%;
+    background-repeat: no-repeat;
+}
+main
+{
+	background:white;
+	min-height:100%;
+	padding-bottom:25px;
+}
+header
+{
+	margin-top:5px;
+	height:190px;
+}
+
+.site-title, .site-lead-line
+{
+	font-weight:bold;
+	border-right:2px solid #FF7D81;
+}
+.site-title
+{
+	color:#FF7D81;
+	font-size:1.2em;
+	border-bottom:2px solid #FF7D81;
+}
+.site-lead-line
+{
+	margin-left:70px;
+	font-style:italic;
+	color:#FFC6C7;
+}
+
+header > .menu
+{
+	position:absolute;
+	right:50px;
+	top:1em;
+}
+header > .menu > a
+{
+	background:white;
+	margin-right:10px;
+	padding:0px 5px 0px 5px;
+}
+.login-bar
+{
+	height:3em;
+	position:relative;
+	border-right:2px solid #FFC6C7;
+}
+.login-bar-content
+{
+	font-size:0.9em;
+	position:absolute;
+	border-bottom:2px solid #FFC6C7;
+	padding-right:5px;
+	right:0px;
+}
+.logo
+{
+	margin-top:10px;
+}
+.artifact-01
+{
+	position:absolute;
+	right:-15px;
+	top:40px;
+	width:51px;
+	height:40px;
+}
+.page-title
+{
+	margin-top:0px;
+	padding-top:15px;
+	font-size:1.8em;
+}
+.page-title > a
+{
+	font-size:0.5em;
+}
+.intro-text
+{
+	width:90%;
+}
+hr
+{
+	margin-top:5px;
+	margin-bottom:5px;
+	border-top-color:#FFC6C7;
+}
+hr.short
+{
+	margin-left:0px;
+	width:90%;
+}
+.weather-forecast-img
+{
+	margin-left:15%;
+	width:70%;
+}
+
+@media (max-width: 600px) {
+  .intro-text {
+    display: none;
+  }
+}
