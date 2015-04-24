@@ -1,0 +1,7 @@
+extends layout
+
+block content
+	form(name="insertTodo", action="insertNewTodo", method="post")
+		input(type="text", name='rawText' value="Make Random Todo")
+		input(type="hidden", name='userId' value="#{userId}")
+		input(type="submit", value="Insert Todo")
