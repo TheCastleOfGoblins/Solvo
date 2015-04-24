@@ -24,10 +24,10 @@ var passport = require('passport')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+	var posApi = require('../helpers/posApi');
+	posApi.syntaxAnalysis("The pos libary is working and it's fucking awesome.")
+
 	var request = require('request');
-	var pos = require('pos');
-	var words = new pos.Lexer().lex("The pos libary is working and it's fucking awesome.");
-	var taggedWords = new pos.Tagger().tag(words);
 	//var google = require('google')
 
 	//google.resultsPerPage = 25
@@ -63,7 +63,5 @@ router.get('/auth/facebook', passport.authenticate('facebook'));
 router.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { successRedirect: '/',
                                       failureRedirect: '/posts' }));
-
-
 
 module.exports = router;
