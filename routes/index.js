@@ -4,30 +4,54 @@ var Post = require('../models/post');
 var dbApi = require('../helpers/dbApi');
 var secrets = require('../secrets.json');
 var User = require('../models/user');
-
+var search = require('../data/search');
 var passport = require('passport')
-	, FacebookStrategy = require('passport-facebook').Strategy;
-		console.log('LOgin');
-	passport.use(new FacebookStrategy({
-	    clientID: secrets.facebook.appId,
-	    clientSecret: secrets.facebook.secret,
-	    callbackURL: "http://localhost:3000/auth/facebook/callback"
-	  },
-	  function(accessToken, refreshToken, profile, done) {
-	    //User.findOrCreate(..., function(err, user) {
-	    //  if (err) { return done(err); }
-	    //  done(null, user);
-	    //});
-		console.log(accessToken, refreshToken, profile);
-	  }
-	));
+  , FacebookStrategy = require('passport-facebook').Strategy;
+    console.log('LOgin');
+  passport.use(new FacebookStrategy({
+      clientID: secrets.facebook.appId,
+      clientSecret: secrets.facebook.secret,
+      callbackURL: "http://localhost:3000/auth/facebook/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+      console.log('--------------------------1');
+      console.log(profile._json.id);
+      dbApi.openConnection(function(db){
+        User.findOne({ 'facebookId':profile._json.id }, function(err, existingUser){
+          console.log('--------------------------2');
+          if(existingUser){
+            console.log('--------------------------3');
+            console.log(existingUser);
+            db.close();
+            done(null, existingUser);
+          }
+          else{
+            console.log('--------------------------4');
+            var newUser = new User({'facebookId':profile._json.id});
+              newUser.save(function(err, saved){
+                  db.close();
+                   done(null, saved);
+              });
+          }
+        });
+    });
+    // console.log(accessToken, refreshToken, profile);
+    }
+  ));
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 /* GET home page. */
 router.get('/', function(req, res, next) {
+	var posApi = require('../helpers/posApi');
+	posApi.syntaxAnalysis("The pos libary is working and it's fucking awesome.")
+
 	var request = require('request');
-	var pos = require('pos');
-	var words = new pos.Lexer().lex("The pos libary is working and it's fucking awesome.");
-	var taggedWords = new pos.Tagger().tag(words);
 	//var google = require('google')
 
 	//google.resultsPerPage = 25
@@ -42,28 +66,27 @@ router.get('/', function(req, res, next) {
       formatter: null         // 'gpx', 'string', ...
   };
 
-		var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
+		//var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
 		// Using callback
-		geocoder.geocode('29 champs elysée paris', function(err, shat) {
-        console.log(shat);
+		//geocoder.geocode('29 champs elysée paris', function(err, shat) {
+        //console.log(shat);
 	
 	/*google('node.js best practices', function (err, next, links){
 	  if (err) console.error(err)
 
 		console.log(err,links[0],next);
 		});*/
-
-        res.render('index', { title: 'Express'/*,links:links*/ , taggedWords:taggedWords });
-    
-	});
+        //search.find("burger test",function(error, response, body){
+          //console.log(body);
+          res.render('index', { title: 'Express'/*,links:links*/ });
+        //});
+	//});
 });
 router.get('/auth/facebook', passport.authenticate('facebook'));
 
 router.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { successRedirect: '/',
                                       failureRedirect: '/posts' }));
-
-
 
 module.exports = router;
