@@ -3,6 +3,7 @@ var router = express.Router();
 var Post = require('../models/post');
 var dbApi = require('../helpers/dbApi');
 var secrets = require('../secrets.json');
+var User = require('../models/user');
 
 var passport = require('passport')
 	, FacebookStrategy = require('passport-facebook').Strategy;
