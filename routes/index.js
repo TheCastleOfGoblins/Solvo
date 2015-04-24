@@ -14,19 +14,15 @@ var passport = require('passport')
       callbackURL: "http://localhost:3000/auth/facebook/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-      console.log('--------------------------1');
       console.log(profile._json.id);
       dbApi.openConnection(function(db){
         User.findOne({ 'facebookId':profile._json.id }, function(err, existingUser){
-          console.log('--------------------------2');
           if(existingUser){
-            console.log('--------------------------3');
             console.log(existingUser);
             db.close();
             done(null, existingUser);
           }
           else{
-            console.log('--------------------------4');
             var newUser = new User({'facebookId':profile._json.id});
               newUser.save(function(err, saved){
                   db.close();
@@ -35,7 +31,6 @@ var passport = require('passport')
           }
         });
     });
-    // console.log(accessToken, refreshToken, profile);
     }
   ));
 
