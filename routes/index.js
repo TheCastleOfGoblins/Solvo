@@ -3,6 +3,7 @@ var router = express.Router();
 var Post = require('../models/post');
 var dbApi = require('../helpers/dbApi');
 var secrets = require('../secrets.json');
+var User = require('../models/user');
 
 var passport = require('passport')
 	, FacebookStrategy = require('passport-facebook').Strategy;
@@ -27,33 +28,34 @@ router.get('/', function(req, res, next) {
 	var pos = require('pos');
 	var words = new pos.Lexer().lex("The pos libary is working and it's fucking awesome.");
 	var taggedWords = new pos.Tagger().tag(words);
-	var google = require('google')
+	//var google = require('google')
 
-	google.resultsPerPage = 25
+	//google.resultsPerPage = 25
 	var nextCounter = 0
-	
-	google('node.js best practices', function (err, next, links){
-	  if (err) console.error(err)
-
-		console.log(err,links[0],next);
-
-		//geodecoder: 
-		var geocoderProvider = 'google';
-		var httpAdapter = 'https';
-		// optionnal
-		
-		var extra = {
-		    formatter: null         // 'gpx', 'string', ...
-		};
+  
+  //geodecoder: 
+  var geocoderProvider = 'google';
+  var httpAdapter = 'https';
+  // optionnal
+  
+  var extra = {
+      formatter: null         // 'gpx', 'string', ...
+  };
 
 		var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
 		// Using callback
-		geocoder.geocode('29 champs elysée paris', function(err, res) {
-		    console.log(res);
-		});
+		geocoder.geocode('29 champs elysée paris', function(err, shat) {
+        console.log(shat);
+	
+	/*google('node.js best practices', function (err, next, links){
+	  if (err) console.error(err)
 
-		res.render('index', { title: 'Express',links:links, taggedWords:taggedWords });
+		console.log(err,links[0],next);
+		});*/
+
+        res.render('index', { title: 'Express'/*,links:links*/ , taggedWords:taggedWords });
+    
 	});
 });
 router.get('/auth/facebook', passport.authenticate('facebook'));
