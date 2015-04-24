@@ -2,6 +2,159 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet",href="css/theme.min.css")
+    link(rel="stylesheet",href="css/style.css")
+    link(href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed',rel='stylesheet',type='text/css')
+    script(src="js/bootstrap.min.js")
   body
-    block content
+    main(class="container")
+      header(class="row")
+        div(class="col-md-1")
+          img(class="logo",src="content/logo.png")
+        div(class="col-md-11")
+          div(class="row")
+            header(class="col-md-12")
+              div(class="site-title")
+                | Sol 
+                span(style="color:#FFC6C7;")
+                  | v
+                | o
+              div(class="site-lead-line")
+                | Never do anything by yourself again.
+              div(class="login-bar")
+                div(class="login-bar-content")
+                  | In as
+                  a(href="#")
+                    | &nbsp;Jeremy
+                img(class="artifact-01",src="content/artifact-01.png")
+                h1(class="page-title")
+                  | Page Title | 
+                  a(target="_modal",href="#add-task")
+                    | (my tasks)
+                  a(target="_modal",href="#add-friend")
+                    |  (add friend)
+                  a(target="_modal",href="#add-location")
+                    |  (add location)
+                hr(class="short")
+                p(class="intro-text")
+                  | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut diam nec dui facilisis consectetur id consectetur mi. Sed id consectetur nunc. In suscipit viverra augue vel hendrerit. Sed a turpis consectetur, facilisis ex vel, tempor odio. Nam fermentum purus quam, in lobortis felis ullamcorper sit amet. Nam pulvinar, turpis in eleifend vulputate, eros tellus vehicula turpis, vel aliquet ex ante ac turpis.
+                hr(class="short")
+              nav(class="menu")
+                a(href="#")
+                  | Friends
+                a(href="#")
+                  | Tasks
+                a(href="#")
+                  | Discover
+            div(class="col-md-12")
+      div(class="row")
+        div(class="col-md-5 col-md-offset-1")
+          form
+            div(class="form-group")
+              label(for="to-do")
+                | I have something to do now... :
+              textarea(rows="5",class="form-control",id="to-do",placeholder="Just tell us what you want to do and we will help.")
+            div(class="text-center")
+              a(type="submit",class="btn btn-primary")
+                | Help me with this!
+              a(type="submit",class="btn btn-info")
+                | Save for later
+        div(class="col-md-5")
+          form
+            div(class="form-group")
+              label
+                | Stuff I have to do.
+                a(href="#",target="_modal")
+                  | See all tasks
+            table(class="table table-condensed table-hover")
+              thead
+                tr
+                  th
+                    | Task
+                  th
+                    | Time?
+                  th
+                    | Location?
+              tbody
+                tr
+                  td
+                    | Go to the Arena cinema with John tomorrow at 8:00
+                  td
+                    | April 19th 8:00AM
+                  td
+                    | Cinema Arena 
+                    a(target="_modal",href="#")
+                      | (map)
+                tr(class="danger")
+                  td
+                    span(class="glyphicon glyphicon-exclamation-sign",aria-hidden="true")
+                    | Call Jenny this afternoon
+                  td
+                    | April 18th 4:00PM
+                  td
+                tr
+                  td
+                    | Buy vodka for this evening
+                  td
+                    | April 18th 8:00PM
+                  td
+                    a(target="_modal",href="#")
+                      | Recommend
+      div(class="row")
+        div(class="col-md-10 col-md-offset-1 text-center")
+          hr
+      div(class="row")
+        div(class="col-md-3 col-md-offset-1")
+          h3
+            | You can meetup with 
+            a(href="#",target="_modal")
+              | John
+          p
+            | Both you and 
+            a(href="#",target="_modal")
+              | John
+            | will be together at 
+            a(href="#" target="_modal")
+              | Borisova Gradina
+            | at 5:00 Monday
+          iframe(width="100%",height="250",frameborder="0",style="border:0",src="https://www.google.com/maps/embed/v1/place?q=Sofia&key=AIzaSyBHGpzUbuMA_LU4jrOikW_EEhIyXpVA2ZU")
+        div(class="col-md-4")
+          h3
+            | Bad weather warning for 20th April
+          p 
+            | A bad weather
+            span(style="color:#aaaaff")
+              | 12 C with
+            span(style="color:light-blue")
+              | rain
+            | is expected for 20th April, should you reconsider going to 
+            a(href="#" target="_modal")
+              | Zapaden Park
+          img(class="weather-forecast-img",src="content/rain.png")
+        div(class="col-md-3")
+          h3
+            | Place to buy
+            a(href="#",target="_modal")
+              |  vodka
+            | nearby
+          p
+            | There are 
+            a(href="#",target="_modal")
+              | places nearby
+            | which sell
+            a(href="#",target="_modal")
+              |  vodka
+            | you can do the 
+            a(href="#",target="_modal")
+              | Pick up a vodka on my wa...
+            | task.
+          iframe(width="100%",height="250",frameborder="0",style="border:0",src="https://www.google.com/maps/embed/v1/place?q=Sofia%20NDK&key=AIzaSyBHGpzUbuMA_LU4jrOikW_EEhIyXpVA2ZU")
+      div(class="row")
+        div(class="col-md-10 col-md-offset-1 text-center")
+          br
+          | Was this autohelp usefull? You can see all 
+          a(href="#",target="_modal")
+            | autohelp
+          | for your 
+          a(href="#" target="_modal")
+            | upcomming tasks
