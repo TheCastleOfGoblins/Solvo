@@ -10,7 +10,7 @@ var routes = require('./routes/index');
 var posts = require('./routes/posts');
 var todos = require('./routes/todos');
 var users = require('./routes/users');
-
+var passport = require('passport');
 
 var app = express();
 
@@ -24,6 +24,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
+app.use(passport.initialize());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 var secrets = require('./secrets.json');
