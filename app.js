@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var posts = require('./routes/posts');
+var users = require('./routes/users');
 
 var app = express();
 
@@ -29,6 +30,7 @@ var secrets = require('./secrets.json');
 // declarate roudes here:
 app.use('/', routes);
 app.use('/posts', posts);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
