@@ -43,7 +43,11 @@ router.get('/', function(req, res, next) {
 		// optionnal
 		
 		var extra = {
+<<<<<<< HEAD
 		    apiKey: secrets.google.server, // for Mapquest, OpenCage, Google Premier
+=======
+		    // for Mapquest, OpenCage, Google Premier
+>>>>>>> ae31bc110bff63223ec6a182af4be10a8f67ef00
 		    formatter: null         // 'gpx', 'string', ...
 		};
 
