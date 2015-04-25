@@ -10,6 +10,7 @@ var formattingPipeline = require('../helpers/formattingPipeline');
 var regexAddressFormatter = require("../helpers/formatters/regexAddress");
 var relativeAddressFormatter = require("../helpers/formatters/relativeAddress");
 var baseTimeFormatter = require("../helpers/formatters/baseTimeFormater");
+var weekdayFormatter = require("../helpers/formatters/weekdayFormatter");
 
 var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy;
@@ -52,11 +53,11 @@ router.get('/', function(req, res, next) {
 	var posApi = require('../helpers/posApi');
 
 	var wikiAPi = require('../helpers/wikiAPi');
-	posApi.syntaxAnalysis("The pos libary is working and it's fucking awesome.");
+	posApi.syntaxAnalysis("The pos libary is working and its fucking awesome.");
 	console.log(req.session);
 
-	var model = posApi.syntaxAnalysis("at 11 00 and at 11:00 with john at 12 pm. When is 11.34")
-  model.raw = "Meet with John at 11:00 AM or at 12:00 AM";
+	var model = posApi.syntaxAnalysis("Go to the National Palace of Culture at 11 00 with Jenny on Thursday. Meetup with her at John`s home")
+  model.raw = "Go to the National Palace of Culture at 11 00 with Jenny on Thursday";
   console.log(model);
 	
 	var request = require('request');
@@ -92,8 +93,10 @@ router.get('/', function(req, res, next) {
         //});
 	//});
   
-  formattingPipeline.format(model,[baseTimeFormatter,regexAddressFormatter,relativeAddressFormatter],function(model){
+  formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter],function(model){
+    console.log('\n');
     console.log(model);
+    console.log('finished model');
     res.render('index', { title: 'Express'/*,links:links , taggedWords:taggedWords */});
   });
 });
