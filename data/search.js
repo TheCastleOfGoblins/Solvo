@@ -7,7 +7,7 @@ function find (query, callback) {
   var queryUri = baseQueryUri + formattedQuery + jsonFormat;
   var authToken = new Buffer(":" + key).toString('base64');
   
-  console.log(formattedQuery);
+  
   var options = {
     url: queryUri,
     headers: {
@@ -15,7 +15,10 @@ function find (query, callback) {
     }
   };
 
-  request.get(options,callback);
+  request.get(options,function(err, response){
+    var body = JSON.parse(response.body); 
+    callback(err, body.d.results[0]);
+  });
 }
 
 module.exports.find = find;
