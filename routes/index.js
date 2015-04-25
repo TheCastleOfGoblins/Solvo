@@ -3,6 +3,7 @@ var router = express.Router();
 var Post = require('../models/post');
 var dbApi = require('../helpers/dbApi');
 var secrets = require('../secrets.json');
+var overpassApi = require('../helpers/overpassApi');
 var User = require('../models/user');
 var accessTokenModel = require('../models/accessToken');
 var search = require('../data/search');
@@ -24,7 +25,7 @@ var passport = require('passport')
     },
     function(accessToken, refreshToken, profile, done) {
       dbApi.openConnection(function(db){
-      	
+
         User.findOne({ 'facebookId':profile._json.id }, function(err, existingUser){
           if(existingUser){
           	var newToken = new accessTokenModel({'userId':existingUser.id, 'token':accessToken})
@@ -34,7 +35,7 @@ var passport = require('passport')
 			        done(null, existingUser);
           		});
           	});
-          	
+
           }
           else{
             var newUser = new User({'facebookId':profile._json.id});
@@ -46,7 +47,7 @@ var passport = require('passport')
 		              done(null, saved);
               		});
           		});
-          		
+
               });
           }
         });
@@ -61,6 +62,19 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
   done(null, user);
 });
+
+
+router.get('/overpass', function(req, res, next) {
+	overpassApi.overpassApi('node(50.745,7.17,50.75,7.18);out;', function(error, data) {
+		if(error) {
+			console.log(error.message);
+		} else {
+			console.log(data);
+		}
+	});
+});
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	var graph = require('fbgraph');
@@ -73,7 +87,7 @@ router.get('/', function(req, res, next) {
 	// 			 graph.get("/me/taggable_friends", function(err, res) {
 	// 			 	console.log(err, res);
 	// 			 });
-				 
+
 	// 		});
 	// 	})
 	// }
@@ -81,22 +95,22 @@ router.get('/', function(req, res, next) {
 
 	var wikiAPi = require('../helpers/wikiAPi');
 	posApi.syntaxAnalysis("The pos libary is working and its fucking awesome.");
-	
+
 
 
 	var model = posApi.syntaxAnalysis("Go fishing on 1/03/2017 at 11 AM")
   console.log(model);
 
-	
+
 	var request = require('request');
-	
+
 	// var defaultCaseApi = require('../helpers/defaultCase');
 	var posApi = require('../helpers/posApi');
 	var posedString = posApi.syntaxAnalysis('find big stupid dogs');
 	// defaultCaseApi.defaultSearch(posedString, function(err, info){
 	// 	console.log(info);
 	// });
-	//geodecoder: 
+	//geodecoder:
 	var geocoderProvider = 'google';
 	var httpAdapter = 'https';
 	// optionnal
@@ -110,17 +124,17 @@ router.get('/', function(req, res, next) {
 		// Using callback
 		//geocoder.geocode('29 champs elysée paris', function(err, shat) {
         //console.log(shat);
-	
+
 	/*google('node.js best practices', function (err, next, links){
 	  if (err) console.error(err)
-    
+
 		console.log(err,links[0],next);
 		});*/
         //search.find("burger test",function(error, response, body){
           //console.log(body);
         //});
 	//});
-  
+
   formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter],function(model){
     console.log('\n');
     console.log(model);
@@ -131,7 +145,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/auth/facebook', passport.authenticate('facebook'));
 
-router.get('/auth/facebook/callback', 
+router.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/',
                                       failureRedirect: '/' }));
 
