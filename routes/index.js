@@ -64,9 +64,9 @@ router.get('/', function(req, res, next) {
 	var defaultCaseApi = require('../helpers/defaultCase');
 	var posApi = require('../helpers/posApi');
 	var posedString = posApi.syntaxAnalysis('find big stupid Dogs');
-	defaultCaseApi.defaultSearch(posedString, function(err, info){
-		console.log(info.wiki, info.google);
-	});
+	// defaultCaseApi.defaultSearch(posedString, function(err, info){
+	// 	console.log(info.wiki, info.google);
+	// });
 	//geodecoder: 
 	var geocoderProvider = 'google';
 	var httpAdapter = 'https';
