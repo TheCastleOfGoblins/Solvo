@@ -18,11 +18,11 @@ var todoSchema = mongoose.Schema({
     	required: true
     },
     syntaxAnalysis: Object,
-    locations: [{ coords: [Number] }]
+    locations: [{ /*type: "Point",*/ coords: [Number] }]
 });
 
 
-todoSchema.index({ 'locations' : '2dsphere' });
+//todoSchema.index({ 'locations' : '2dsphere' });
 
 todoSchema.methods.showTodo = function () {
 	return this.rawText + '\n' 

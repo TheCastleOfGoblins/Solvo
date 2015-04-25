@@ -49,8 +49,8 @@ router.get('/', function(req, res, next) {
 router.post('/location', function(req, res, next) {
 	dbApi.openConnection(function(db){
 		Todo.update(
-			/*{ _id: req.body.todoId, userId: req.session.passport.user._id }*/{}, 
-			{ $push: { 'locations': { 'coords': [req.body.y, req.body.x] } } } , 
+			{ _id: req.body.todoId, userId: req.session.passport.user._id }, 
+			{ $push: { locations: [{ coords: [req.body.y, req.body.x] }] } } , 
 			function(err, numAffected){
 				res.json(numAffected);
 				db.close();
