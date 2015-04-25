@@ -25,8 +25,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+var session = require('express-session')
+var sess = {
+  secret: 'keyboard cat',
+  cookie: {},
+  resave:true,
+  saveUninitialized: true
+}
+
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1) // trust first proxy
+  sess.cookie.secure = true // serve secure cookies
+}
+
+app.use(session(sess))
 
 app.use(passport.initialize());
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
