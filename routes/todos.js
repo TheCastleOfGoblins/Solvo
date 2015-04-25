@@ -18,8 +18,8 @@ router.get('/list', function(req, res, next) {
 router.post('/resolve', function(req, res, next) {
 	dbApi.openConnection(function(db){
 		Todo.update(
-			{ _id: req.body.todoId, userId: req.session.passport.user._id }, 
-			{ isResolved: true } , 
+			{ _id: req.body.todoId, userId: req.session.passport.user._id },
+			{ isResolved: true } ,
 			function(err, numAffected){
 				res.json(numAffected);
 				db.close();
@@ -31,7 +31,7 @@ router.post('/resolve', function(req, res, next) {
 router.post('/insert', function(req, res, next) {
 	var newTodo = new Todo({
 		rawText: req.body.rawText,
-		userId: req.session.passport.user._id
+		userId: req.session.passport.user._id,
 	});
 	dbApi.openConnection(function(db){
 		newTodo.save(function(err, saved){
@@ -49,8 +49,8 @@ router.get('/', function(req, res, next) {
 router.post('/location', function(req, res, next) {
 	dbApi.openConnection(function(db){
 		Todo.update(
-			{ _id: req.body.todoId, userId: req.session.passport.user._id }, 
-			{ $push: { locations: [{ coords: [req.body.y, req.body.x] }] } } , 
+			{ _id: req.body.todoId, userId: req.session.passport.user._id },
+			{ location: [req.body.y, req.body.x] } ,
 			function(err, numAffected){
 				res.json(numAffected);
 				db.close();
