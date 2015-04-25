@@ -8,6 +8,9 @@ function matchSingle(token, patternPart){
   if(patternPart.regex){
     if(!patternPart.regex.test(token[0]))return false;
   }
+  if(patternPart.options){
+    if(!(patternPart.options.indexOf(token[0]) > 0))return false;
+  }
   return true;
 }
 

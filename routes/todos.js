@@ -7,10 +7,7 @@ var dbApi = require('../helpers/dbApi');
 
 router.get('/list', function(req, res, next) {
 	dbApi.openConnection(function(db){
-		console.log(req.body, req.query);
-		Todo.find({ userId: req.body.userId, isResolved: false }, function(err, todos){
-			//res.json(todos/*.map(function(todo){ return todo.showTodo(); })*/);
-			//res.render('todo', { title: 'Express', todos: todos, userId: req.params.userId });
+		Todo.find({ userId: req.session.passport.user._id, isResolved: false }, function(err, todos){
 			res.json(todos);
 			db.close();
 		});
@@ -18,19 +15,12 @@ router.get('/list', function(req, res, next) {
 });
 
 
-/*router.get('/insert', function(req, res, next) {
-	res.render('insertTodo', { title: 'Express', userId: req.query.userId });
-	res.json();
-});*/
-
-
 router.post('/resolve', function(req, res, next) {
 	dbApi.openConnection(function(db){
 		Todo.update(
-			{ _id: req.body.todoId, userId: req.body.userId }, 
+			{ _id: req.body.todoId, userId: req.session.passport.user._id }, 
 			{ isResolved: true } , 
 			function(err, numAffected){
-				//res.redirect('/todos/list/' + req.body.userId);
 				res.json(numAffected);
 				db.close();
 		});
@@ -38,16 +28,32 @@ router.post('/resolve', function(req, res, next) {
 });
 
 
-router.post('/insert'/*'/insertNewTodo'*/, function(req, res, next) {
+router.post('/insert', function(req, res, next) {
 	var newTodo = new Todo({
 		rawText: req.body.rawText,
-		userId: req.body.userId
+		userId: req.session.passport.user._id
 	});
 	dbApi.openConnection(function(db){
 		newTodo.save(function(err, saved){
-			//res.redirect('/todos/list/' + req.body.userId);
 			res.json(saved);
 			db.close();
+		});
+	});
+});
+
+
+// for testing
+router.get('/', function(req, res, next) {
+	res.render('insertTodo', { title: 'Express' });
+});
+router.post('/location', function(req, res, next) {
+	dbApi.openConnection(function(db){
+		Todo.update(
+			/*{ _id: req.body.todoId, userId: req.session.passport.user._id }*/{}, 
+			{ $push: { 'locations': { 'coords': [req.body.y, req.body.x] } } } , 
+			function(err, numAffected){
+				res.json(numAffected);
+				db.close();
 		});
 	});
 });
