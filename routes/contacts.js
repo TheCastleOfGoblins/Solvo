@@ -28,4 +28,22 @@ router.post('/create', function(req, res, next) {
 	});
 });
 
+
+router.post('/bulkLoad', function(req, res, next) {
+	var contactsArray = require("./friends_emi.json").concat(require("./friends_hari.json"));
+	dbApi.openConnection(function(db){
+		contactsArray.forEach(function(elem) {
+
+			elem.facebookId = elem.id;
+			delete elem.id;
+   				
+			Contact.update({ facebookId: elem.facebookId }, elem, {upsert: true}, 
+				function(err, res){ /*console.log(err, res);*/ }
+			);
+
+		});
+		db.close();
+	}); 
+});
+
 module.exports = router;

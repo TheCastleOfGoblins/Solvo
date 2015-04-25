@@ -2,4 +2,5 @@ node_modules/*
 *.log
 secrets.json
 build/*
-
+friends_hari.json
+friends_emi.json
