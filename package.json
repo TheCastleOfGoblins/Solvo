@@ -21,6 +21,7 @@
     "passport": "^0.2.1",
     "passport-facebook": "^2.0.0",
     "pos": "^0.1.9",
+    "query-overpass": "^1.0.0",
     "request": "^2.55.0",
     "serve-favicon": "^2.2.0"
   }
