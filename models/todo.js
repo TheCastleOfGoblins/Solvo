@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var todoSchema = mongoose.Schema({
     rawText: {
-    	type: String, 
+    	type: String,
     	required: true
     },
     isResolved: {
@@ -19,14 +19,15 @@ var todoSchema = mongoose.Schema({
     	required: true
     },
     syntaxAnalysis: Object,
-    locations: [{ /*type: "Point",*/ coords: [Number] }]
+    location: Array
+    // locations: [{ /*type: "Point",*/ coords: [Number] }]
 });
 
 
 //todoSchema.index({ 'locations' : '2dsphere' });
 
 todoSchema.methods.showTodo = function () {
-	return this.rawText + '\n' 
+	return this.rawText + '\n'
 		+ this.isResolved + '\n'
   		+ this.createdAt + '\n'
   		+ this.userId + '\n';

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var userSchema = mongoose.Schema({
+
     facebookId	: { type: String, required: true },
 
     about		: String,
@@ -17,6 +18,7 @@ var userSchema = mongoose.Schema({
 
     username 	: String,
     password 	: String
+
 });
 
 
