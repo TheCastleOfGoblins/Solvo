@@ -13,6 +13,8 @@ var baseTimeFormatter = require("../helpers/formatters/baseTimeFormater");
 var weekdayFormatter = require("../helpers/formatters/weekdayFormatter");
 var dateFormatter = require("../helpers/formatters/dateFormatter");
 var dateTimeFormatter = require("../helpers/formatters/dateTimeFormatter");
+var addressFormatter = require("../helpers/formatters/addressFormatter");
+var atAddressFormatter = require("../helpers/formatters/atAddressFormatter");
 
 var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy;
@@ -58,7 +60,7 @@ router.get('/', function(req, res, next) {
 	posApi.syntaxAnalysis("The pos libary is working and its fucking awesome.");
 	console.log(req.session);
 
-	var model = posApi.syntaxAnalysis("Go fishing on 1/03/2017 at 11 AM")
+	var model = posApi.syntaxAnalysis("meet Jon at the intersection of Opulchenska and Slivnica .")
   console.log(model);
 	
 	var request = require('request');
@@ -94,7 +96,7 @@ router.get('/', function(req, res, next) {
         //});
 	//});
   
-  formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter],function(model){
+  formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter,addressFormatter,atAddressFormatter],function(model){
     console.log('\n');
     console.log(model);
     console.log('finished model');

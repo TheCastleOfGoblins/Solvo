@@ -17,7 +17,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/createDummyPost',function(req, res, next){
-
     var newRandomPost = new Post({title: req.body.test_param, content:Math.random().toFixed(5)});
 
     console.log(req.body, newRandomPost);
