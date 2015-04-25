@@ -1,7 +1,19 @@
 extends layout
 
 block content
-	form(name="insertTodo", action="insertNewTodo", method="post")
-		input(type="text", name='rawText' value="Make Random Todo")
-		input(type="hidden", name='userId' value="#{userId}")
+	form(name="insertTodo", action="insert", method="post")
+		input(type="text", name='rawText' value="Buy vodka")
 		input(type="submit", value="Insert Todo")
+
+	form(name="resolveTodo", action="resolve", method="post")
+		input(type="text", name='todoId' value="")
+		input(type="submit", value="Resolve Todo")
+
+	form(name="listTodo", action="list", method="get")
+		input(type="submit", value="List Todos")
+
+	form(name="locationTodo", action="location", method="post")
+		input(type="text", name='todoId' value="")
+		input(type="number", name="x" value="")
+		input(type="number", name="y" value="")
+		input(type="submit", value="Location Todo")
