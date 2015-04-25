@@ -5,6 +5,12 @@ var dbApi = require('../helpers/dbApi');
 var secrets = require('../secrets.json');
 var User = require('../models/user');
 var search = require('../data/search');
+
+var formattingPipeline = require('../helpers/formattingPipeline');
+var regexAddressFormatter = require("../helpers/formatters/regexAddress");
+var relativeAddressFormatter = require("../helpers/formatters/relativeAddress");
+var baseTimeFormatter = require("../helpers/formatters/baseTimeFormater");
+
 var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy;
   passport.use(new FacebookStrategy({
@@ -43,9 +49,15 @@ passport.deserializeUser(function(user, done) {
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	var posApi = require('../helpers/posApi');
+
 	var wikiAPi = require('../helpers/wikiAPi');
 	posApi.syntaxAnalysis("The pos libary is working and it's fucking awesome.");
 	console.log(req.session);
+
+	var model = posApi.syntaxAnalysis("Meet with John at 11 00 AM or at 12 00 AM")
+  model.raw = "Meet with John at 11:00 AM or at 12:00 AM";
+  console.log(model);
+
 	var request = require('request');
 	//var google = require('google')
 
@@ -69,14 +81,18 @@ router.get('/', function(req, res, next) {
 	
 	/*google('node.js best practices', function (err, next, links){
 	  if (err) console.error(err)
-
+    
 		console.log(err,links[0],next);
 		});*/
         //search.find("burger test",function(error, response, body){
           //console.log(body);
-          res.render('index', { title: 'Express'/*,links:links*/ });
         //});
 	//});
+  
+  formattingPipeline.format(model,[baseTimeFormatter,regexAddressFormatter,relativeAddressFormatter],function(model){
+    console.log(model);
+    res.render('index', { title: 'Express'/*,links:links , taggedWords:taggedWords */});
+  });
 });
 
 router.get('/auth/facebook', passport.authenticate('facebook'));
