@@ -99,9 +99,8 @@ router.get('/', function(req, res, next) {
 
 
 
-	var model = posApi.syntaxAnalysis("meet Jon at the intersection of Opulchenska and Slivnica .")
-  console.log(model);
-
+	var model = posApi.syntaxAnalysis("Go fishing on 1/03/2017 at 11 AM with Dimiter Smith and Nia Naydenova and Snejana Spasova")
+  	console.log(model);
 
 	var request = require('request');
 
@@ -136,8 +135,8 @@ router.get('/', function(req, res, next) {
         //});
 	//});
 
-  formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter,addressFormatter,atAddressFormatter],function(model){
-
+  var contactFormater = require('../helpers/formatters/contactFormater');
+  formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter,addressFormatter,atAddressFormatter, contactFormater],function(model){
     console.log('\n');
     console.log(model);
     console.log('finished model');
