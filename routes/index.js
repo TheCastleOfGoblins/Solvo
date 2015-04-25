@@ -38,7 +38,7 @@ var passport = require('passport')
 
           }
           else{
-            var newUser = new User({'facebookId':profile._json.id});
+            var newUser = new User({'facebookId':profile._json.id, 'name': profile._json.name});
               newUser.save(function(err, saved){
               	var newToken = new accessTokenModel({'userId':existingUser.id, 'token':accessToken})
           		accessTokenModel.remove({'userId':existingUser.id},function(){
@@ -77,8 +77,7 @@ router.get('/overpass', function(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	var graph = require('fbgraph');
-	console.log(req.session);
+	// var graph = require('fbgraph');
 	// if(req.session.passport.user){
 	// 	dbApi.openConnection(function(db){
 	// 		accessTokenModel.find({'userId':req.session.passport.user._id} , function(err, accessToken){
@@ -139,7 +138,7 @@ router.get('/', function(req, res, next) {
     console.log('\n');
     console.log(model);
     console.log('finished model');
-    res.render('index', { title: 'Express'/*,links:links , taggedWords:taggedWords */});
+    res.render('index', { title: 'Express', username: req.session.passport.user.name/*,links:links , taggedWords:taggedWords */});
   });
 });
 
