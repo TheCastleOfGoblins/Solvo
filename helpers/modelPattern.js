@@ -24,7 +24,6 @@ function matchFromIndex(model,index,pattern) {
 function match (model, pattern){
   var matchLocations = [];
   for(var i = 0; i < model.length - pattern.length + 1; i++){
-    console.log(i);
     if(matchFromIndex(model,i,pattern)){
       matchLocations.push(i);
       i += pattern.length;

@@ -54,7 +54,7 @@ router.get('/', function(req, res, next) {
 	posApi.syntaxAnalysis("The pos libary is working and it's fucking awesome.");
 	console.log(req.session);
 
-	var model = posApi.syntaxAnalysis("Meet with John at 11 00 AM or at 12 00 AM")
+	var model = posApi.syntaxAnalysis("at 11 00 and at 11:00 with john at 12 pm. When is 11.34")
   model.raw = "Meet with John at 11:00 AM or at 12:00 AM";
   console.log(model);
 
