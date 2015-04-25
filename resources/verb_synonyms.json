@@ -1,0 +1,34 @@
+{
+    "synonyms" : {
+        "question": "ask",
+        "inquire": "ask",
+
+        "get": "take",
+        "bring": "take",
+
+        "purchase": "buy",
+        "acquire": "buy",
+
+        "reserve": "book",
+
+        "contact": "call",
+        "phone": "call",
+
+        "email": "write",
+        "message": "write",
+
+        "cleaned": "washed",
+
+    },
+    "baseVerbs": [
+        "ask",
+        "take",
+        "buy",
+        "book",
+        "call",
+        "write",
+        "washed",
+        "meet",
+        "visit",
+    ],
+}
