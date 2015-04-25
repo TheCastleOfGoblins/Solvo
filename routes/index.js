@@ -48,6 +48,7 @@ passport.deserializeUser(function(user, done) {
 });
 /* GET home page. */
 router.get('/', function(req, res, next) {
+
 	var posApi = require('../helpers/posApi');
 
 	var wikiAPi = require('../helpers/wikiAPi');
@@ -57,21 +58,23 @@ router.get('/', function(req, res, next) {
 	var model = posApi.syntaxAnalysis("at 11 00 and at 11:00 with john at 12 pm. When is 11.34")
   model.raw = "Meet with John at 11:00 AM or at 12:00 AM";
   console.log(model);
-
+	
 	var request = require('request');
-	//var google = require('google')
+	
+	var defaultCaseApi = require('../helpers/defaultCase');
+	var posApi = require('../helpers/posApi');
+	var posedString = posApi.syntaxAnalysis('find big stupid Dogs');
+	defaultCaseApi.defaultSearch(posedString, function(err, info){
+		console.log(info.wiki, info.google);
+	});
+	//geodecoder: 
+	var geocoderProvider = 'google';
+	var httpAdapter = 'https';
+	// optionnal
 
-	//google.resultsPerPage = 25
-	var nextCounter = 0
-  
-  //geodecoder: 
-  var geocoderProvider = 'google';
-  var httpAdapter = 'https';
-  // optionnal
-  
-  var extra = {
-      formatter: null         // 'gpx', 'string', ...
-  };
+	var extra = {
+	  formatter: null         // 'gpx', 'string', ...
+	};
 
 		//var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
