@@ -1,5 +1,6 @@
 function matchSingle(token, patternPart){
-  if(patternPart.word && typeof(token[0]) == "String"){
+
+  if(patternPart.word && typeof(token[0]) == "string"){
     if(token[0].toLowerCase() != patternPart.word.toLowerCase()) return false;
   }
   if(patternPart.type){
