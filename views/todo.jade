@@ -5,12 +5,12 @@ block content
   p List my To-Dos
 
 
-  table
-    each todo, index in #{todos}
+  table(border="1")
+    each todo, index in todos
       tr
-        td index
-        td todo.rawText
-        td todo.createdAt
+        td #{index}
+        td #{todo.rawText}
+        td #{todo.createdAt}
         td
           form(name="resolve#{todo._id}", action="resolve", method="post")
             input(type="hidden", name='userId' value="#{userId}")
