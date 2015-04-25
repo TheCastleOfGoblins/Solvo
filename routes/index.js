@@ -107,4 +107,13 @@ router.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/',
                                       failureRedirect: '/' }));
 
+
+router.get('/weather', function(req, res, next) {
+  require('../helpers/weatherApi').getWeather(
+    { lat: req.query.lat, lon: req.query.lon }, req.query.dt,
+    function(err, forecast) {
+      res.json(forecast);
+    });
+});
+
 module.exports = router;
