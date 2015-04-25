@@ -21,4 +21,13 @@ router.post('/create', function(req, res, next) {
 
 });
 
+router.get('/list', function(req, res, next) {
+  	dbApi.openConnection(function(db){
+  		Location.find({}, function(err, locations){
+  			res.json(locations);
+  			db.close();
+  		});
+	});
+});
+
 module.exports = router;
