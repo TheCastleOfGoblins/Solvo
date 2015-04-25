@@ -1,4 +1,4 @@
-function seachPerObject (ObjectString, callback) {
+function searchObject (ObjectString, callback) {
 	var request = require('request');
 	request.get('http://en.wikipedia.org/w/api.php?format=json&action=opensearch&search=' + ObjectString,function(err, response){
 		var body = JSON.parse(response.body);
@@ -10,4 +10,4 @@ function seachPerObject (ObjectString, callback) {
 	});
 }
 
-module.exports.seachPerObject = seachPerObject
+module.exports.searchObject = searchObject
