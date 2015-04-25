@@ -7,7 +7,6 @@ var User = require('../models/user');
 var search = require('../data/search');
 var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy;
-    console.log('LOgin');
   passport.use(new FacebookStrategy({
       clientID: secrets.facebook.appId,
       clientSecret: secrets.facebook.secret,
@@ -44,8 +43,9 @@ passport.deserializeUser(function(user, done) {
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	var posApi = require('../helpers/posApi');
-	posApi.syntaxAnalysis("The pos libary is working and it's fucking awesome.")
-
+	var wikiAPi = require('../helpers/wikiAPi');
+	posApi.syntaxAnalysis("The pos libary is working and it's fucking awesome.");
+	console.log(req.session);
 	var request = require('request');
 	//var google = require('google')
 
@@ -78,10 +78,11 @@ router.get('/', function(req, res, next) {
         //});
 	//});
 });
+
 router.get('/auth/facebook', passport.authenticate('facebook'));
 
 router.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { successRedirect: '/',
-                                      failureRedirect: '/posts' }));
+                                      failureRedirect: '/' }));
 
 module.exports = router;
