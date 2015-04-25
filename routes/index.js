@@ -140,7 +140,7 @@ router.get('/', function(req, res, next) {
     console.log('\n');
     console.log(model);
     console.log('finished model');
-    res.render('index', { title: 'Express', username: req.session.passport.user.name/*,links:links , taggedWords:taggedWords */});
+    res.render('index', { title: 'Express', /*username: req.session.passport.user.name,links:links , taggedWords:taggedWords */});
   });
 });
 

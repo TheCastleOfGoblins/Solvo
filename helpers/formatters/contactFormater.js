@@ -43,7 +43,7 @@ function format (model, callback) {
  //  	});
 
 
-  	   matchSingleModel(model,[{type : 'NN',regex:/^[A-Z][a-z0-9_-]+$/},
+  	numberOfContacts += matchSingleModel(model,[{type : 'NN',regex:/^[A-Z][a-z0-9_-]+$/},
 	    					{type : 'NN',regex:/^[A-Z][a-z0-9_-]+$/}]);
 
   	numberOfContacts += matchSingleModel(model,[{type : 'NN',regex:/^[A-Z][a-z0-9_-]+$/},
