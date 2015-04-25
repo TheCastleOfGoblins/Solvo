@@ -1,6 +1,7 @@
 var modelPattern = require('../modelPattern');
 
 function format (model, callback) {
+  console.log("baseTimeFormatter for : '" + model.raw + "'");
   var offset = 0;
   modelPattern.match(model,[
     {word : 'at'},

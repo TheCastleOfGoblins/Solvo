@@ -8,6 +8,8 @@ function format (syntacticModel, formaters, callback) {
   for(var i = 0; i < formaters.length; i++){
     current = function(cur,fromatingFunction){
       return function(model){
+        console.log('\n');
+        console.log(model);
         fromatingFunction(model, cur);
       };
     }(current,formaters[i].format);

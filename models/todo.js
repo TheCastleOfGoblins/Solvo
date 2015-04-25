@@ -13,6 +13,7 @@ var todoSchema = mongoose.Schema({
     	type: Date,
     	default: Date.now
     },
+    reminderDates: [Date],
     userId: {
     	type: String,
     	required: true
