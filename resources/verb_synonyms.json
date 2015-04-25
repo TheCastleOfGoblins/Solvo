@@ -21,14 +21,15 @@
 
     },
     "baseVerbs": [
-        "ask",
-        "take",
-        "buy",
-        "book",
-        "call",
+        "ask", //email template, user, 
+        "take", 
+        "buy", //map with shops
+        "visit", //map with address + directions
+        "book", 
+        "play", //weather
+        "call", //
         "write",
         "washed",
-        "meet",
-        "visit",
+        "meet", //
     ],
 }
