@@ -11,6 +11,8 @@ var regexAddressFormatter = require("../helpers/formatters/regexAddress");
 var relativeAddressFormatter = require("../helpers/formatters/relativeAddress");
 var baseTimeFormatter = require("../helpers/formatters/baseTimeFormater");
 var weekdayFormatter = require("../helpers/formatters/weekdayFormatter");
+var dateFormatter = require("../helpers/formatters/dateFormatter");
+var dateTimeFormatter = require("../helpers/formatters/dateTimeFormatter");
 
 var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy;
@@ -56,8 +58,7 @@ router.get('/', function(req, res, next) {
 	posApi.syntaxAnalysis("The pos libary is working and its fucking awesome.");
 	console.log(req.session);
 
-	var model = posApi.syntaxAnalysis("Go to the National Palace of Culture at 11 00 with Jenny on Thursday. Meetup with her at John`s home")
-  model.raw = "Go to the National Palace of Culture at 11 00 with Jenny on Thursday";
+	var model = posApi.syntaxAnalysis("Go fishing on 1/03/2017 at 11 AM")
   console.log(model);
 	
 	var request = require('request');
@@ -93,7 +94,7 @@ router.get('/', function(req, res, next) {
         //});
 	//});
   
-  formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter],function(model){
+  formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter],function(model){
     console.log('\n');
     console.log(model);
     console.log('finished model');
@@ -106,5 +107,14 @@ router.get('/auth/facebook', passport.authenticate('facebook'));
 router.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { successRedirect: '/',
                                       failureRedirect: '/' }));
+
+
+router.get('/weather', function(req, res, next) {
+  require('../helpers/weatherApi').getWeather(
+    { lat: req.query.lat, lon: req.query.lon }, req.query.dt,
+    function(err, forecast) {
+      res.json(forecast);
+    });
+});
 
 module.exports = router;

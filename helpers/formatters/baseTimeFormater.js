@@ -16,7 +16,7 @@ function format (model, callback) {
       hour : parseInt(model[idx+1][0]) + (/pm|PM/.test(model[idx+4][0]) ? 12 : 0),
       minute : parseInt(model[idx+3][0])
     };
-    model.splice(idx + 1, 4, [ time , 'Date' ]);
+    model.splice(idx + 1, 4, [ time , 'Time' ]);
   });
   
   
@@ -33,7 +33,7 @@ function format (model, callback) {
       hour : parseInt(model[idx+1][0]) + (/pm|PM/.test(model[idx+3][0]) ? 12 : 0),
       minute : parseInt(model[idx+2][0])
     };
-    model.splice(idx + 1, 3, [ time , 'Date' ]);
+    model.splice(idx + 1, 3, [ time , 'Time' ]);
   });
   
   offset = 0;
@@ -49,7 +49,7 @@ function format (model, callback) {
       hour : parseInt(model[idx+1][0]),
       minute : parseInt(model[idx+3][0])
     };
-    model.splice(idx + 1, 3, [ time , 'Date' ]);
+    model.splice(idx + 1, 3, [ time , 'Time' ]);
   });
   
   offset = 0;
@@ -64,7 +64,7 @@ function format (model, callback) {
       hour : parseInt(model[idx+1][0]) + (/pm|PM/.test(model[idx+2][0]) ? 12 : 0),
       minute : 0
     };
-    model.splice(idx + 1, 2, [ time , 'Date' ]);
+    model.splice(idx + 1, 2, [ time , 'Time' ]);
   });
   
   offset = 0;
@@ -80,7 +80,7 @@ function format (model, callback) {
       hour : parseInt(model[idx][0]) + (/pm|PM/.test(model[idx+3][0]) ? 12 : 0),
       minute : parseInt(model[idx+2][0])
     };
-    model.splice(idx , 4, [ time , 'Date' ]);
+    model.splice(idx , 4, [ time , 'Time' ]);
   });
   
   offset = 0;
@@ -95,7 +95,7 @@ function format (model, callback) {
       hour : parseInt(model[idx][0]) + (/pm|PM/.test(model[idx+2][0]) ? 12 : 0),
       minute : parseInt(model[idx+1][0])
     };
-    model.splice(idx , 3, [ time , 'Date' ]);
+    model.splice(idx , 3, [ time , 'Time' ]);
   });
   
   offset = 0;
@@ -111,10 +111,9 @@ function format (model, callback) {
       minute : parseInt(model[idx+2][0])
     };
     console.write(model[idx+2][0]);
-    model.splice(idx , 3, [ time , 'Date' ]);
+    model.splice(idx , 3, [ time , 'Time' ]);
   });
   
-    
   offset = 0;
   modelPattern.match(model,[
     {word : 'at'},
@@ -127,7 +126,7 @@ function format (model, callback) {
       hour : parseInt(model[idx+1][0]),
       minute : parseInt(model[idx+2][0])
     };
-    model.splice(idx + 1, 2, [ time , 'Date' ]);
+    model.splice(idx + 1, 2, [ time , 'Time' ]);
   });
   
   offset = 0;
@@ -141,10 +140,10 @@ function format (model, callback) {
       hour : parseInt(model[idx][0]),
       minute : parseInt(model[idx+1][0])
     };
-    model.splice(idx , 2, [ time , 'Date' ]);
+    model.splice(idx , 2, [ time , 'Time' ]);
   });
   
-    modelPattern.match(model,[
+  modelPattern.match(model,[
     {word : 'at'},
     {type : 'CD'},
   ]).forEach(function(idx){
@@ -154,7 +153,7 @@ function format (model, callback) {
       hour : i,
       minute : Math.floor((f - i) * 100)
     };
-    model.splice(idx + 1, 1, [ time , 'Date' ]);
+    model.splice(idx + 1, 1, [ time , 'Time' ]);
   });
   
   callback(model);
