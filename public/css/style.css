@@ -141,8 +141,7 @@ hr.short
 }
 
 .modal-body {
-	height: 500px;
-	width: 680;
+	height: 600px;
 }
 
 .modal-dialog {
@@ -178,6 +177,11 @@ td {
 #task-raw{
   font-family: 'Nothing You Could Do', cursive;
   font-weight:bold;
-  font-size:3em;
+  font-size:2em;
   font-style:italic;
+}
+#taskMapCanvas {
+  width:100%;
+  height:250px;
+  margin-bottom:25px;
 }

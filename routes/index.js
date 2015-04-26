@@ -101,7 +101,7 @@ router.get('/', function(req, res, next) {
   var Todo = require('../models/todo');
 
   dbApi.openConnection(function(db){
-    Todo.find({"userId":req.session.passport.user._id, 'isResolved':false}).limit(5).exec(function(err,todos){
+    Todo.find({"userId":req.session.passport.user._id, 'isResolved':false}).limit(1000).exec(function(err,todos){
       
       todos = todos || [];
       console.log(err);

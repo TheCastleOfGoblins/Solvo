@@ -34,7 +34,6 @@ block content
             tr(id='#{item._id}' data-task)
               td
                 | #{item.rawText}
-                .contacts
               td
                 button(class="help btn btn-sm" text="Help")
                   |Help!
@@ -124,7 +123,7 @@ block content
           button(type="button",class="btn btn-primary")
             | Save changes
 
-  div(class="modal fade",id="taskList",tabindex="-1",role="dialog",aria-labelledby="taskModalLabel",aria-hidden="true")
+  div(class="modal fade",id="taskModal",tabindex="-1",role="dialog",aria-labelledby="taskModalLabel",aria-hidden="true")
       div(class="modal-dialog")
         div(class="modal-content")
           div(class="modal-header")
@@ -138,8 +137,15 @@ block content
                     hr
                     | Go to the cinema with Jenny at 13 May 2015.
                     hr
+                  div(class='task-date')
+                  div(class='task-weather')
+                  small(class='show-on-contacts',style='display:none')
+                    | Is your friend here
+                  div(class='contacts')
+                  
                 div(class="col-md-7")
-                  iframe(width="100%",height="450",frameborder="0",style="border:0",src="https://www.google.com/maps/embed/v1/place?q=Svoge,Bulgaria&key=AIzaSyBHGpzUbuMA_LU4jrOikW_EEhIyXpVA2ZU")
+                  div(id='taskMapCanvas')
+                  div(class='articles')
           div(class="modal-footer")
             button(type="button",class="btn btn-default",data-dismiss="modal")
               | Close

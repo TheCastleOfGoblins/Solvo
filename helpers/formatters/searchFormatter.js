@@ -32,17 +32,17 @@ function format(model, callback){
     var async = require('async');
     async.parallel({
 	   google: function(cb){
-	    	// google.resultsPerPage = 3;
-			// var nextCounter = 0;
-	        // google(queryForSearch, function (err, next, links){
-	        	// console.log(links);
-				// if(err){
-					// console.log(err);
-					// cb(null, null)
-				// }else{
-					// cb(null, links);
-				// }
-			// });
+	    	google.resultsPerPage = 3;
+			var nextCounter = 0;
+	        /*google(queryForSearch, function (err, next, links){
+	        	 console.log(links);
+				 if(err){
+					 console.log(err);
+					 cb(null, null)
+				 }else{
+					 cb(null, links);
+				 }
+			 });*/
     	cb(null, null);
 	    },
 	    wiki: function(cb){
@@ -56,14 +56,14 @@ function format(model, callback){
     		});
 	    },
 	    bing: function (cb){
-	    	// bingApi.find(queryForSearch, function(err, bingData){
-	    	// 	if(err){
-	    	// 		console.log(err);
-	    	// 		cb(null, null);
-	    	// 	}else{
-	    	// 		cb(null, bingData);
-	    	// 	}
-	    	// });
+	    	 /*bingApi.find(queryForSearch, function(err, bingData){
+	    	 	if(err){
+	    	 		console.log(err);
+	    	 		cb(null, null);
+	    	 	}else{
+	    	 		cb(null, bingData);
+	    	 	}
+	    	 });*/
     		cb(null, null)
 	    }
 	},

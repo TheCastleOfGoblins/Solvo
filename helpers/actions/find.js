@@ -42,9 +42,11 @@ function act (model, callback, finalCallback) {
       var obj = objects[0];
       entityMapper.mapSomething(obj, model.location.lat, model.location.lon, function(err, res){
         if(err){
+          console.log(err);
           callback(model);
         }
         else {
+          console.log(res)
           model.response.entities = JSON.parse(res.body).elements;
           finalCallback(model);
         }

@@ -58,7 +58,7 @@ router.post('/create', function(req, res, next) {
 router.get('/bulkLoad', function(req, res, next) {
 	var contactsArray = require("./friends_emi.json").concat(require("./friends_hari.json"));
 	dbApi.openConnection(function(db){
-		contactsArray.slice(0, 100).forEach(function(elem, idx, array) {
+		contactsArray.slice(0, 150).forEach(function(elem, idx, array) {
       //console.log(idx, array.length);
 
 			elem.facebookId = elem.id;

@@ -1,3 +1,4 @@
+
 var resp = {
   "__v": 0,
   "syntaxAnalysis": [
@@ -87,9 +88,11 @@ var resp = {
 };
 
 
+var markersArray = [];
+
 var toDosSemanticInfo = {}
 $(document).ready(function () {
-
+  
 	$('#submitToDo').click(function(){
 
 		$.post('/todos/insert/', {rawText:$('#to-do').val()} , function(response){
@@ -104,7 +107,7 @@ $(document).ready(function () {
 			if(response._id){
 
 				$('#to-do').val('');
-				var newRow = $('<tr id='+ response._id +' data-task=""><td>'+ response.rawText +'<div class="contacts"></div></td><td><button text="Help" class="help btn btn-sm">Help!</button></td><td><div class="checkbox"><input type="checkbox" class="resolve"></div></td></tr>')
+				var newRow = $('<tr id='+ response._id +' data-task=""><td>'+ response.rawText +'<div></div></td><td><button text="Help" class="help btn btn-sm">Help!</button></td><td><div class="checkbox"><input type="checkbox" class="resolve"></div></td></tr>')
 
 			    newRow.find('.resolve').click(function(){
 					var id = $(this).parents('tr').attr('id');
@@ -129,7 +132,8 @@ $(document).ready(function () {
 					  var id = $(self).parents('tr').attr('id');
 
 					  $.post('/todos/runActions/', {id:id, lat:position.coords.latitude, lon:position.coords.longitude},function(response){
-					  	console.log('MY resp: ' + response);
+					  	showTask(response,position.coords);
+              appendArticles(response.searches, 3);
 					  });
 					});
 				});
@@ -191,7 +195,9 @@ $(document).ready(function () {
 		  var id = $(self).parents('tr').attr('id');
 
 		  $.post('/todos/runActions/', {id:id, lat:position.coords.latitude, lon:position.coords.longitude},function(response){
-		  	console.log(response);
+        //console.log(response);
+        showTask(response,position.coords);
+        appendArticles(response.searches, 3);
 		  });
 		});
 	});
@@ -199,8 +205,11 @@ $(document).ready(function () {
 });
 
 function appendContacts(contacts) {
+  $('.show-on-contacts').hide();
   contacts.forEach(function(contact) {
+    $('.show-on-contacts').show();
     $('.contacts').append(showContact(contact));
+    $('table .contacts').removeClass('contacts');
   })
 }
 
@@ -267,5 +276,100 @@ function appendArticles(articles, count) {
 
     $('.articles').append(showArticle(forDisplay[i], type));
     i++;
+  }
+}
+
+function drawMap(data, coords){
+  var mapOptions = {
+    center: { lat: coords.latitude, lng: coords.longitude},
+    zoom: 16
+  };
+  taskMap = new google.maps.Map(document.getElementById('taskMapCanvas'),mapOptions);
+  var mapCanvas = document.getElementById('taskMapCanvas');
+  
+  setTimeout(function() { google.maps.event.trigger(taskMap, "resize")}, 300);
+  
+  var myAddress = new google.maps.LatLng(coords.latitude,coords.longitude);
+  
+  var marker = new google.maps.Marker({
+      position: myAddress,
+      icon : "content/human.png",
+      map: taskMap,
+    });
+  
+  for(var i = 0; i < data.addresses.length; i++){
+    var myLatlng = new google.maps.LatLng(eval(data.addresses[i])[0].latitude,eval(data.addresses[i])[0].longitude);
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      icon : "content/map_marker.png",
+      map: taskMap,
+    });
+    markersArray.push(marker);
+    marker.setMap(taskMap);
+  }
+  
+  for(var i = 0; i < data.entities.length; i++){
+    var myLatlng = new google.maps.LatLng(data.entities[i].lat,data.entities[i].lon);
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      icon : "content/map_marker.png",
+      map: taskMap,
+    });
+    markersArray.push(marker);
+    marker.setMap(taskMap);
+    //google.maps.event.addListener(marker, 'click', toggleBounce)
+  }
+  /*var marker = new google.maps.Marker({
+    position: location,
+    map: map
+  });
+
+  markers.push(marker);
+
+  google.maps.event.addListener(marker, 'click', function() {
+    if(onClick)
+      onClick(marker);
+  });*/
+}
+
+function drawWeather(weather, locationName) {
+
+	var weatherPanel = "<div class='weather-panel col-sm-8'>"
+		+ "<h3>Weather forecast for "+(new Date(weather.dt)).toDateString()+"</h3>"
+    + "<img style='width:50px;height:50px;float:right;' class=\"weather-forecast-img\" src=\"http://openweathermap.org/img/w/"+weather.weather.pic+".png\" />"
+		+ "<p>"+weather.weather.main+"</p>"
+		+ "<span style=\"color:#aaaaff\">"+parseInt(weather.avgTemp)+"C with </span>"
+		+ "<span style=\"color:light-blue\">"+weather.weather.description+" is expected at "+locationName+"</span>"
+		+ "<div style='clear:both'></div></div>";
+	return weatherPanel;
+}
+
+
+function showTask(data,coords){
+  $('.contacts').text('');
+  $('#task-raw').text('');
+  $('.task-date').text('');
+  $('.task-weather').text('');
+  $('.articles').text('');
+
+  $('#taskModal').modal('show');
+  if(data.addresses.length > 0 || data.entities.length > 0){
+    drawMap(data,coords);
+  }
+  $('.contacts').text('');
+  if(data.users.length > 0){
+    data.users.forEach(function(word) {
+      appendContacts(word);
+    })
+  }
+  $('#task-raw').text(data.raw);
+  if(data.dateTimes.length){
+    $('.task-date').text(data.dateTimes[0].date.year + '-' + data.dateTimes[0].date.month + '-' + data.dateTimes[0].date.day + ' ' + data.dateTimes[0].time.hour + ':' + data.dateTimes[0].time.minute);
+  }
+  console.log(data);
+  if(data.weather && !$.isEmptyObject(data.weather)){
+    console.log(data.weather);
+    var template = drawWeather(data.weather,"Sofia");;
+    $('.task-weather').append(template);
   }
 }
