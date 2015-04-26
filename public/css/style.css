@@ -157,3 +157,24 @@ div.text-center button{
 td {
     padding: 7px;
 }
+.modal-dialog{
+  width:90%;
+}
+.modal-header{
+  border-bottom:none;
+}
+.modal-footer{
+  background:#ff5c61;
+}
+.btn-checkbox{
+  border-radius:100%;
+  color:white;
+  background:#33cca5;
+  font-size:1.2em;
+}
+#task-raw{
+  font-family: 'Nothing You Could Do', cursive;
+  font-weight:bold;
+  font-size:3em;
+  font-style:italic;
+}
