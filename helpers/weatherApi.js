@@ -1,10 +1,11 @@
 var request = require('request');
 
 function getWeather(coords, queryDate, callback) {
+	queryDate = (new Date(queryDate.toDateString())).getTime();
+	var today = (new Date((new Date()).toDateString())).getTime();
 	var daysCnt = Math.ceil(
-		(queryDate/*.getTime()*/ - Date.now()) / (1000*60*60*24)
+		(queryDate - today) / (1000*60*60*24)
 	) + 1;
-	// Example: queryDate = (new Date("Sat Apr 25 2015")).getTime();
 
 	request.get("http://api.openweathermap.org/data/2.5/forecast/daily?lat="+coords.lat+"&lon="+coords.lon+"&cnt="+daysCnt+"&mode=json", function(err, response){
 		if(err) {

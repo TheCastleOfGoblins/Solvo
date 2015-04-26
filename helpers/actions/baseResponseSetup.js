@@ -5,6 +5,7 @@ function act (model, callback, finalCallback) {
     dateTimes : [],
     entities : [],
     searches : {},
+    weather: {},
     contactForm : false,
     raw : model.raw
   }
