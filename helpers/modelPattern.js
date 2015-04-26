@@ -6,6 +6,11 @@ function matchSingle(token, patternPart){
   if(patternPart.type){
     if(token[1] != patternPart.type) return false;
   }
+  
+  if(patternPart.typeList){
+    if(!(patternPart.typeList.indexOf(token[1]) >= 0))return false;
+  }
+  
   if(patternPart.regex){
     if(!patternPart.regex.test(token[0]))return false;
   }

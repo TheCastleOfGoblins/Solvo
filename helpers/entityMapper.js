@@ -3,23 +3,29 @@ var shops = require('../resources/shop.json');
 var openStreetMapsApi = require('./openStreetMapsApi');
 
 function variations(type){
-  type = type.toLowerCase();
-  var result = [type];
-  result.push(type + 's');
-  if(type[type.length - 1] == 's'){
-    result.push(type.split(0,type.length-2));
+  if(type){
+    type = type.toLowerCase();
+    var result = [type];
+    result.push(type + 's');
+    if(type[type.length - 1] == 's'){
+      result.push(type.split(0,type.length-2));
+    }
+    if(['a','e','o','u','i','y'].indexOf(type[type.length - 1]) >= 0){
+      result.push(type.split(0,type.length-2) + 'ing');
+    }
+    else{
+      result.push(type + 'ing');
+    }
+    return result;
+  } 
+  else {
+    return type;
   }
-  if(['a','e','o','u','i','y'].indexOf(type[type.length - 1]) >= 0){
-    result.push(type.split(0,type.length-2) + 'ing');
-  }
-  else{
-    result.push(type + 'ing');
-  }
-  return result;
 }
 
 function shop(type) {
   var vrs = variations(type);
+  if(!vrs) return undefined;
   var result;
   vrs.reverse().forEach(function(v){
     if(shops[v])result = v;
@@ -53,7 +59,7 @@ function something(type){
 }
 
 function mapShops(type,longtitude,latitude,callback){
-  var s = shops(type);
+  var s = shop(type)
   openStreetMapsApi.find("shop",s,longtitude,latitude,function(err,data){
     data.openStreetMapResultType = s;
     callback(err,data)
