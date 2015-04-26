@@ -139,7 +139,7 @@ router.get('/', function(req, res, next) {
 
   var contactFormater = require('../helpers/formatters/contactFormater');
   var searchFormatter = require('../helpers/formatters/searchFormatter');
-  
+  console.log('AZ sum mi6o ida ot gorica');
   formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter,addressFormatter,atAddressFormatter, contactFormater, searchFormatter],function(model){
     console.log('\n');
     console.log(model);
