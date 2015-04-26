@@ -100,7 +100,7 @@ router.get('/', function(req, res, next) {
     	});
   	});
 });*/
-router.get('/findOne', function(req, res, next) {
+router.get('/runActions', function(req, res, next) {
 	dbApi.openConnection(function(db){
 		Todo.find({ _id: req.query.id }, function(err, todo){
 			var actions = require('../helpers/actions');
