@@ -97,24 +97,24 @@ router.get('/', function(req, res, next) {
 
 	var model = posApi.syntaxAnalysis("find a restaurant to go with Kosta");
 
- 
+
   var Todo = require('../models/todo');
-  
+
   dbApi.openConnection(function(db){
     Todo.find({"userId":req.session.passport.user._id, 'isResolved':false}).limit(5).exec(function(err,todos){
-      
+
       var templateParameters = {
         'title':"Solvo Homepage",
         'todos':todos
       }
       db.close();
-      
+
       res.render('index', templateParameters);
     });
   });
     /*openStreetMapsApi.find("amenity","bar",42.6930319,23.3206504,function(err,data){
       // console.log(data.body);
-      
+
     });*/
 });
 
@@ -133,5 +133,9 @@ router.get('/weather', function(req, res, next) {
     });
 });
 
+router.get('/login', function(req, res, next) {
+  res.render('login', {title: 'Solvo Login'});
+});
+
 module.exports = router;
- 
+
