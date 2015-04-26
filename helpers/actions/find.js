@@ -14,7 +14,7 @@ function act (model, callback, finalCallback) {
   });
 
   objects = objects.map(function(o){
-    return entityMapper.shop(o);
+    return entityMapper.something(o);
   });
 
   objects = objects.filter(function(o){
@@ -23,24 +23,24 @@ function act (model, callback, finalCallback) {
 
   objects = objects.filter(onlyUnique);
   
-  if(model.actionCandidates.indexOf('buy') < 0){
+  if(model.actionCandidates.indexOf('find') < 0){
     callback(model);
     return;
   }
   
   recognize = objects.length > 0 || model.actionCandidates.onlyCandidate;
   
-  var index = model.actionCandidates.indexOf('buy');
+  var index = model.actionCandidates.indexOf('find');
 
   if (index > -1) {
       model.actionCandidates.splice(index, 1);
   }
 
   if(recognize) {
-    model.response.action = 'buy';
     if(objects.length > 0){
+      model.response.action = 'find';
       var obj = objects[0];
-      entityMapper.mapShops(obj, model.location.lat, model.location.lon, function(err, res){
+      entityMapper.mapSomething(obj, model.location.lat, model.location.lon, function(err, res){
         if(err){
           callback(model);
         }
@@ -50,8 +50,8 @@ function act (model, callback, finalCallback) {
         }
       });
     }
-    else if(model.actionCandidates.onlyCandidate) {
-      entityMapper.mapShops(undefined, model.location.lat, model.location.lon, function(err, res){
+    /*else if(model.actionCandidates.onlyCandidate) {
+      entityMapper.mapSomething(undefined, model.location.lat, model.location.lon, function(err, res){
         if(err){
           callback(model);
         }
@@ -60,7 +60,7 @@ function act (model, callback, finalCallback) {
           finalCallback(model);
         }
       });
-    }
+    }*/
     else {
       callback(model);
     }

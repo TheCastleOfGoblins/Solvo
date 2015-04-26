@@ -76,7 +76,7 @@ function mapAmenity(type,longtitude,latitude,callback){
 }
 
 function mapSomething(type,longtitude,latitude,callback){
-  var s = something(type);
+  var s = type;
   if(s.amenity){
     openStreetMapsApi.find("amenity",s.amenity,longtitude,latitude,function(err,data){
       data.openStreetMapResultType = s.amenity;
