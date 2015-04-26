@@ -1,6 +1,7 @@
 var modelPattern = require('../modelPattern');
 
 function format(model, callback){
+	console.log('pipe serch mama:');
 	var google = require('google');
 	var wikiAPi = require('../wikiAPi');
 	var bingApi = require('../../data/search');
@@ -21,7 +22,12 @@ function format(model, callback){
 	    	queryForSearch += token[0];
     	}
     });
-    
+
+    if(!queryForSearch && !objectForSearch){
+    	callback(model);
+    	return;
+    }
+
     var async = require('async');
     async.parallel({
 	   google: function(cb){
