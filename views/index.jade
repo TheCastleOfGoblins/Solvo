@@ -24,7 +24,7 @@ block content
           | Stuff I have to do.
           a(href="#",target="_modal",data-toggle="modal",data-target="#myModal")
             | See all tasks
-      table(class="table table-condensed table-hover")
+      table(class="table table-condensed table-hover" id='latest')
         thead
           tr
             th
@@ -34,7 +34,7 @@ block content
             th
         tbody
         each item in todos
-          tr(id='#{item._id}' data-id='#{item._id' data-task)
+          tr(id='#{item._id}' data-task)
             td
               | #{item.rawText}
               .contacts

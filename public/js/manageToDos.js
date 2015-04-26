@@ -5,14 +5,44 @@ $(document).ready(function () {
 
 		$.post('/todos/insert/', {rawText:$('#to-do').val()} , function(response){
 			if(response._id){
-				console.log(response);
-				toDosSemanticInfo[response._id] = response.syntaxAnalysis;
+					
 				$('#to-do').val('');
-        response.syntaxAnalysis.forEach(function(word) {
-          if(word[1] == 'Contacts') {
-            appendContacts(word[0]);
-          }
-        })
+				var newRow = $('<tr id='+ response._id +' data-task=""><td>'+ response.rawText +'<div class="contacts"></div></td><td><button text="Help" class="help btn btn-sm">Help!</button></td><td><div class="checkbox"><input type="checkbox" class="resolve"></div></td></tr>')
+			    
+			    newRow.find('.resolve').click(function(){
+					var id = $(this).parents('tr').attr('id');
+					var self = this;
+					
+					$.post('/todos/resolve',{todoId:id}, function(response){
+						console.log(response);
+						if(response.ok == 1){
+							$(self).parents('tr').fadeOut(function(){
+								$(self).parents('tr').remove();
+							});
+						}
+					});
+				});
+
+			    newRow.find('.help').click(function(){
+					var self = this;
+					navigator.geolocation.getCurrentPosition(function(position) {
+					  var pos = new google.maps.LatLng(position.coords.latitude,
+					                                   position.coords.longitude);
+					  
+					  var id = $(self).parents('tr').attr('id');
+							  
+					  $.post('/todos/runActions/', {id:id, lat:position.coords.latitude, lon:position.coords.longitude},function(response){
+					  	console.log(response);
+					  });
+					});
+				});
+
+			    $('#latest').append(newRow);
+			    response.syntaxAnalysis.forEach(function(word) {
+			      if(word[1] == 'Contacts') {
+			        appendContacts(word[0]);
+			      }
+			    })
 			}
 			//TO DO draw in the table the created ToDo
 		});
@@ -30,14 +60,17 @@ $(document).ready(function () {
 	$('.resolve').click(function(){
 		var id = $(this).parents('tr').attr('id');
 		var self = this;
-		console.log(id);
+		
 		$.post('/todos/resolve',{todoId:id}, function(response){
 			console.log(response);
 			if(response.ok == 1){
-				$(self).parents('tr').fadeOut();
+				$(self).parents('tr').fadeOut(function(){
+					$(self).parents('tr').remove();
+				});
+
 			}
 		});
-	})
+	});
 	$('.help').click(function(){
 		var self = this;
 		navigator.geolocation.getCurrentPosition(function(position) {
@@ -46,7 +79,7 @@ $(document).ready(function () {
 		  
 		  var id = $(self).parents('tr').attr('id');
 				  
-		  $.post('/todos/runActions/', {id:id, lat:position.coords.latitude, longitude:position.coords.longitude},function(response){
+		  $.post('/todos/runActions/', {id:id, lat:position.coords.latitude, lon:position.coords.longitude},function(response){
 		  	console.log(response);
 		  });
 		});
