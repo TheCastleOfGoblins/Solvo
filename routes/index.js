@@ -100,7 +100,7 @@ router.get('/', function(req, res, next) {
  
     
   var Todo = require('../models/todo');
-  
+  console.log('EMi e');
   dbApi.openConnection(function(db){
     Todo.find({"userId":req.session.passport.user._id}).limit(5).exec(function(err,todos){
       
