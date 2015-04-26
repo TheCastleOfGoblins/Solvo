@@ -66,9 +66,9 @@ router.post('/insert', function(req, res, next) {
 
 
 // for testing
-/*router.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
 	res.render('insertTodo', { title: 'Express' });
-});*/
+});
 router.post('/location', function(req, res, next) {
 	dbApi.openConnection(function(db){
 		Todo.update(
@@ -100,7 +100,7 @@ router.get('/', function(req, res, next) {
     	});
   	});
 });*/
-router.get('/runActions', function(req, res, next) {
+router.post('/runActions', function(req, res, next) {
 	dbApi.openConnection(function(db){
 		Todo.find({ _id: req.query.id }, function(err, todo){
 			var actions = require('../helpers/actions');
