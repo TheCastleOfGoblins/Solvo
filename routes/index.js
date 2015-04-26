@@ -86,11 +86,16 @@ router.get('/', function(req, res, next) {
 	// 		});
 	// 	})
 	// }
+
+  if(!req.session.passport.user){
+    res.redirect('/auth/facebook/');
+    return;
+  }
 	var posApi = require('../helpers/posApi');
 
 	var wikiAPi = require('../helpers/wikiAPi');
 
-	var model = posApi.syntaxAnalysis("buy shoes at 11/11/2020")
+	var model = posApi.syntaxAnalysis("find a restaurant to go with Kosta");
 
   format.run(model,function(model){
     model.request = req;
@@ -100,15 +105,26 @@ router.get('/', function(req, res, next) {
     }
     model.time = new Date();
     
+    var Todo = require('../models/todo');
     actions.run(model,function(model){
       console.log(model);
-      res.render('index', { title: 'Express'});
+      dbApi.openConnection(function(db){
+        Todo.find({"userId":req.session.passport.user._id}).limit(5).exec(function(err,todos){
+          
+          var templateParameters = {
+            'title':"Solvo Homepage",
+            'todos':todos
+          }
+          db.close();
+          res.render('index', templateParameters);
+        });
+      });
     });
+  });
     /*openStreetMapsApi.find("amenity","bar",42.6930319,23.3206504,function(err,data){
       // console.log(data.body);
       
     });*/
-  });
 });
 
 router.get('/auth/facebook', passport.authenticate('facebook'));

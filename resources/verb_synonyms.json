@@ -2,28 +2,27 @@
   "synonyms" : {
       "buy" : "buy",
       "purchase" : "buy",
-      "aquire" : "buy",
+      "acquire" : "buy",
       "obtain" : "buy",
       "get" : "buy",
       
+      "find" : "find",
+      "search" : "find",
+      "look" : "find",
+      "discover" : "find",
+      
+      "go" : "go",
+      "travel" : "go",
+      "visit" : "go",
+      "meet" : "go",
+      "jog" : "go",
+      "walk" : "go",
+      "drive" : "go",
+      
+      "ask" : "ask",
       "question": "ask",
       "inquire": "ask",
-
-      "get": "take",
-      "bring": "take",
-
-      "purchase": "buy",
-      "acquire": "buy",
-
-      "reserve": "book",
-
-      "contact": "call",
-      "phone": "call",
-
-      "email": "write",
-      "message": "write",
-
-      "cleaned": "washed"
+      "contact": "ask"
   },
   "baseVerbs": [
       "ask", 
