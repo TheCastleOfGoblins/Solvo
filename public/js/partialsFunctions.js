@@ -44,3 +44,14 @@ function drawReminders(todosWithActions) {
 
 	reminders += "</div>";
 }
+
+
+function drawEmail(reciever, sender, question) {	// if response.contactForm == true
+	var emailPanel = "<div class='weather-panel col-md-4'>"
+		+ "<h3>Ask "+reciever+"</h3>"
+		+ "<p>Dear "+reciever
+			+", I wanted to ask you "+question
+			+". Best wishes, "+sender+"!</p>"
+		+ "</div>";
+	return emailPanel;
+}

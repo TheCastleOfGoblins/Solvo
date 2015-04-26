@@ -116,7 +116,7 @@ router.post('/runActions', function(req, res, next) {
     		model.time = new Date();
     		
     		actions.run(model, function(model){
-    			console.log(model[model.length - 1]);
+    			
     			model.response.searches.wiki = model[model.length - 1].wiki;
     			model.response.searches.google = model[model.length - 1].google;
     			model.response.searches.bing = model[model.length - 1].bing;
