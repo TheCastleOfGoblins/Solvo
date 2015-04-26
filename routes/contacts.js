@@ -64,11 +64,11 @@ router.get('/bulkLoad', function(req, res, next) {
 			delete elem.id;
    				
 			Contact.update({ facebookId: elem.facebookId }, elem, {upsert: true}, 
-				function(err, res){ /*console.log(err, res);*/ }
-			);
+        function(err, res){ /*console.log(err, res);*/ }
+      );
 
-		});
-		db.close();
+    });
+		//db.close();
 	}); 
 });
 

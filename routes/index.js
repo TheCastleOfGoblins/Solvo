@@ -93,6 +93,7 @@ router.get('/', function(req, res, next) {
 	var model = posApi.syntaxAnalysis("drive Jon from Svoge Iskarski Prolom 5 to Opulchenska.")
 
   format.run(model,function(model){
+    model.request = req;
     model.location = {
       longtitude : 42.6930319,
       latitude : 23.3206504

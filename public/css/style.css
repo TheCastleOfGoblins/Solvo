@@ -131,4 +131,18 @@ hr.short
 #map-canvas {
         width: 500px;
         height: 400px;
-      }
+  }
+
+.map-container {
+	width: 100%;
+	height: 100%;
+}
+
+.modal-body {
+	height: 500px;
+	width: 680;
+}
+
+.modal-dialog {
+	width: 795px;
+}
