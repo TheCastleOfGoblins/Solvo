@@ -1,6 +1,10 @@
 function act (model, callback, finalCallback) {
-  
-  callback(model);
+  // if(reco){
+  //   finalCallback(model);
+  // }
+  // else{
+    callback(model);
+  // }
 }
 
 module.exports.act = act;

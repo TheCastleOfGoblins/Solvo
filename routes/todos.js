@@ -29,14 +29,36 @@ router.post('/resolve', function(req, res, next) {
 
 
 router.post('/insert', function(req, res, next) {
+	if(['!','?','.'].indexOf(req.body.rawText[0]) < 0){
+		req.body.rawText +='.';
+	}
+
 	var newTodo = new Todo({
 		rawText: req.body.rawText,
 		userId: req.session.passport.user._id,
 	});
-	dbApi.openConnection(function(db){
-		newTodo.save(function(err, saved){
-			res.json(saved);
-			db.close();
+
+	var analysis = require('../helpers/format.js');
+	var posApi = require('../helpers/posApi');
+	var model = posApi.syntaxAnalysis(newTodo.rawText);
+
+	analysis.run(model , function(semantic){
+		semantic.forEach(function(part){
+			
+			if(part[1] == 'DateTime'){
+				var dateString = part[0].date.year + '-' + part[0].date.month + '-' + part[0].date.day + '-03:00';
+				newTodo.reminderDates = [];
+				
+				newTodo.reminderDates.push(new Date(dateString));
+			}
+		});
+		newTodo.syntaxAnalysis = semantic;
+
+		dbApi.openConnection(function(db){
+			newTodo.save(function(err, saved){
+				res.json(saved);
+				db.close();
+			});
 		});
 	});
 });

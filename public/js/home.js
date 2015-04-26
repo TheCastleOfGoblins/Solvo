@@ -1,3 +1,10 @@
+// READ ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// THIS is the array that must come from the backend, in order to put mark on the map		
+//var locations =  [[-34.397, 150.644, function(mark){console.log(mark.getPosition())}]];
+// READ ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
 var RecomendedTasks = new function() {
 	var self = this;
 	var taskMap;
@@ -13,13 +20,11 @@ var RecomendedTasks = new function() {
 	}
 
 	this.init = function() {
-		taskMap = new GMap($('#myModal .map-container')[0]);
+		taskMap = new GMap($('#myModal .map-container')[0], locations);
 	}
 
 	this.openMap = function() {
 		$('.modal-footer').hide();
-
-		taskMap.addMarker(new google.maps.LatLng(-34.397, 150.644));
 
         setTimeout(function() { taskMap.getMap().setCenter(taskMap.myPos) }, 1000);
 
@@ -35,17 +40,19 @@ var RecomendedTasks = new function() {
 	});
 }
 
+//[[123,434],[2323,3443,callback]]
 
 
-var GMap =  function(container, markers) {
+var GMap =  function(container, locations) {
 	var self = this;
 	var map;
 	var markers = [];
 	var container = container;
 	var myPos;
+	var locations = locations;
 	self.myPos;
 
-	this.initialize = function(container, markers) {
+	this.initialize = function(container, locations) {
 
 	  var mapOptions = {
 	    zoom: 12,
@@ -66,9 +73,10 @@ var GMap =  function(container, markers) {
 		    title: 'Me'
 		  });
 
-      	  if(markers) {
-      	  	for(var i=0; i < markers.length; i++)
-  	  			self.addMarker(markers[i])
+      	  if(locations) {
+      	  	for(var i=0; i < locations.length; i++)
+  	  			self.addMarker(new google.maps.LatLng(locations[i][0],
+	                                       locations[i][1]), locations[i][2])
       	  }
 
 	    })
@@ -124,7 +132,7 @@ var GMap =  function(container, markers) {
 	}
 
 	$(document).ready(function(){
-		self.initialize(container);
+		self.initialize(container, locations);
 	})
 };
 
