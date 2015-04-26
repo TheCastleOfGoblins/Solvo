@@ -58,12 +58,16 @@ block content
     div(class="col-md-10 col-md-offset-1 text-center")
       hr
   div(class="row")
-    div(class="col-md-3 col-md-offset-1")
+    div(class="col-md-4")
       h3
         | You can meetup with 
         a(href="#",target="_modal")
           | John
-      p
+      div(class="col-md-3")
+        div(class="map-container")
+        a(target="_modal", href="javascript:;", data-target="#myModal", data-toggle="modal", class="map-opener") 
+          | LOCATION
+      p(class="col-md-9")
         | Both you and 
         a(href="#",target="_modal")
           | John
@@ -71,7 +75,6 @@ block content
         a(href="#" target="_modal")
           | Borisova Gradina
         | at 5:00 Monday
-      iframe(width="100%",height="250",frameborder="0",style="border:0",src="https://www.google.com/maps/embed/v1/place?q=Sofia&key=AIzaSyBHGpzUbuMA_LU4jrOikW_EEhIyXpVA2ZU")
     div(class="col-md-4")
       h3
         | Bad weather warning for 20th April
@@ -85,7 +88,7 @@ block content
         a(href="#" target="_modal")
           | Zapaden Park
       img(class="weather-forecast-img",src="/content/rain.png")
-    div(class="col-md-3")
+    div(class="col-md-4")
       h3
         | Place to buy
         a(href="#",target="_modal")
@@ -122,8 +125,7 @@ block content
           h4(class="modal-title")
             | Modal title
         div(class="modal-body")
-          p
-            | One fine body&hellip;
+          div(class="map-container")
         div(class="modal-footer")
           button(type="button",class="btn btn-default",data-dismiss="modal")
             | Close

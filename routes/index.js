@@ -8,15 +8,8 @@ var User = require('../models/user');
 var accessTokenModel = require('../models/accessToken');
 var search = require('../data/search');
 
-var formattingPipeline = require('../helpers/formattingPipeline');
-var regexAddressFormatter = require("../helpers/formatters/regexAddress");
-var relativeAddressFormatter = require("../helpers/formatters/relativeAddress");
-var baseTimeFormatter = require("../helpers/formatters/baseTimeFormater");
-var weekdayFormatter = require("../helpers/formatters/weekdayFormatter");
-var dateFormatter = require("../helpers/formatters/dateFormatter");
-var dateTimeFormatter = require("../helpers/formatters/dateTimeFormatter");
-var addressFormatter = require("../helpers/formatters/addressFormatter");
-var atAddressFormatter = require("../helpers/formatters/atAddressFormatter");
+var format = require('../helpers/format');
+var actions = require('../helpers/actions');
 var entityMapper = require("../helpers/entityMapper");
 
 var passport = require('passport')
@@ -96,57 +89,24 @@ router.get('/', function(req, res, next) {
 	var posApi = require('../helpers/posApi');
 
 	var wikiAPi = require('../helpers/wikiAPi');
-	posApi.syntaxAnalysis("The pos libary is working and its fucking awesome.");
-
-
 
 	var model = posApi.syntaxAnalysis("drive Jon from Svoge Iskarski Prolom 5 to Opulchenska.")
 
-  	console.log(model);
-
-	var request = require('request');
-
-	// var defaultCaseApi = require('../helpers/defaultCase');
-	var posApi = require('../helpers/posApi');
-	var posedString = posApi.syntaxAnalysis('find big stupid dogs');
-	// defaultCaseApi.defaultSearch(posedString, function(err, info){
-	// 	console.log(info);
-	// });
-	//geodecoder:
-	var geocoderProvider = 'google';
-	var httpAdapter = 'https';
-	// optionnal
-
-	var extra = {
-	  formatter: null         // 'gpx', 'string', ...
-	};
-
-		//var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
-
-		// Using callback
-		//geocoder.geocode('29 champs elysée paris', function(err, shat) {
-        //console.log(shat);
-
-	/*google('node.js best practices', function (err, next, links){
-	  if (err) console.error(err)
-
-		console.log(err,links[0],next);
-		});*/
-        //search.find("burger test",function(error, response, body){
-          //console.log(body);
-        //});
-	//});
-
-  var contactFormater = require('../helpers/formatters/contactFormater');
-  var searchFormatter = require('../helpers/formatters/searchFormatter');
-  console.log('AZ sum mi6o ida ot gorica');
-  formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter,addressFormatter,atAddressFormatter, contactFormater, searchFormatter],function(model){
-    console.log('\n');
-    console.log(model);
-    console.log('finished model');
-   	
-   
-  	res.render('index', { title: 'Express'});
+  format.run(model,function(model){
+    model.location = {
+      longtitude : 42.6930319,
+      latitude : 23.3206504
+    }
+    model.time = new Date();
+    
+    actions.run(model,function(model){
+      console.log(model);
+      res.render('index', { title: 'Express'});
+    });
+    /*openStreetMapsApi.find("amenity","bar",42.6930319,23.3206504,function(err,data){
+      // console.log(data.body);
+      
+    });*/
   });
 });
 
