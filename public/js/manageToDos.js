@@ -11,4 +11,15 @@ $(document).ready(function () {
 			//TO DO draw in the table the created ToDo
 		});
 	});
+
+	$('#to-do').focus(function(){
+		var self = this;
+		$(this).keydown(function(e){
+			
+			if (e.which == 13) {
+        		$('#submitToDo').click();
+        		$(self).off('keydown');
+    		}
+		});
+	});
 });
