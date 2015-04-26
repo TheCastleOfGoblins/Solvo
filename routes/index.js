@@ -86,6 +86,11 @@ router.get('/', function(req, res, next) {
 	// 		});
 	// 	})
 	// }
+
+  if(!req.session.passport.user){
+    res.redirect('/auth/facebook/');
+    return;
+  }
 	var posApi = require('../helpers/posApi');
 
 	var wikiAPi = require('../helpers/wikiAPi');
