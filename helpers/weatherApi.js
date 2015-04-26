@@ -21,7 +21,8 @@ function getWeather(coords, queryDate, callback) {
 				avgTemp: data.temp.day - KELVIN_TO_CELSIUS,
 				weather: {
 					main: data.weather[0].main,
-					description: data.weather[0].description
+					description: data.weather[0].description,
+					pic: data.weather[0].icon
 				},
 				windSpeed: data.speed
 			});

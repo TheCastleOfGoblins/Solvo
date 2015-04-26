@@ -66,9 +66,9 @@ router.post('/insert', function(req, res, next) {
 
 
 // for testing
-/*router.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
 	res.render('insertTodo', { title: 'Express' });
-});*/
+});
 router.post('/location', function(req, res, next) {
 	dbApi.openConnection(function(db){
 		Todo.update(
@@ -100,20 +100,27 @@ router.get('/', function(req, res, next) {
     	});
   	});
 });*/
-router.get('/runActions', function(req, res, next) {
-	dbApi.openConnection(function(db){
-		Todo.find({ _id: req.query.id }, function(err, todo){
-			var actions = require('../helpers/actions');
+router.post('/runActions', function(req, res, next) {
 
-			var model = todo.syntaxAnalysis;
+	dbApi.openConnection(function(db){
+		
+		Todo.find({ _id: req.body.id }, function(err, todos){
+			var actions = require('../helpers/actions');
+			
+			var model = todos[0].syntaxAnalysis;
 			model.request = req;
 			model.location = {
-      			lat : req.query.lat,
-      			lon : req.query.lon
+      			lat : req.body.lat,
+      			lon : req.body.lon
     		};
     		model.time = new Date();
-    
+    		
     		actions.run(model, function(model){
+    			console.log(model[model.length - 1]);
+    			model.response.searches.wiki = model[model.length - 1].wiki;
+    			model.response.searches.google = model[model.length - 1].google;
+    			model.response.searches.bing = model[model.length - 1].bing;
+    			model.response.raw = todos[0].rawText;
     			res.json(model.response);
     		});
 	
