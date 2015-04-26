@@ -1,13 +1,19 @@
 extends layout
 
 block content
-	form(name="insertLocation", action="/locations/create", method="post")
-		input(type="text", name='name')
-		input#locx(type="hidden", name='locx')
-		input#locy(type="hidden", name='locy')
+    .row
+        form(name="insertLocation", action="/locations/create", method="post")
+            .col-md-1
+            .col-md-10
+                .form-group
+                    | Name:&nbsp;
+                    input(type="text", name='name')
+                    input#locx(type="hidden", name='locx')
+                    input#locy(type="hidden", name='locy')
+                .form-group
+                    #map-canvas
+                .form-group
+                    input(type="submit", value="Insert Location")
 
-		input(type="submit", value="Insert Location")
 
-	#map-canvas
-
-	script(src="/js/googlemap.js")
+        script(src="/js/googlemap.js")
