@@ -1,6 +1,6 @@
 // READ ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // THIS is the array that must come from the backend, in order to put mark on the map		
-//var locations =  [[-34.397, 150.644, function(mark){console.log(mark.getPosition())}]];
+var locations =  [[-34.397, 150.644, function(mark){console.log(mark.getPosition())}]];
 // READ ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
