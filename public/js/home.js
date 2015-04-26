@@ -2,7 +2,7 @@
 // THIS is the array that must come from the backend, in order to put mark on the map		
 var locations =  [[-34.397, 150.644, function(mark){console.log(mark.getPosition())}]];
 // READ ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+var position
 
 
 var RecomendedTasks = new function() {
@@ -54,32 +54,32 @@ var GMap =  function(container, locations) {
 
 	this.initialize = function(container, locations) {
 
-	  var mapOptions = {
-	    zoom: 12,
-	  };
+		var mapOptions = {
+			zoom: 12,
+		};
 
-	  map = new google.maps.Map(container,mapOptions);
+		map = new google.maps.Map(container,mapOptions);
 
-       navigator.geolocation.getCurrentPosition(function(position) {
-	      var pos = new google.maps.LatLng(position.coords.latitude,
-	                                       position.coords.longitude);
+		// navigator.geolocation.getCurrentPosition(function(position) {
+		 //  var pos = new google.maps.LatLng(position.coords.latitude,
+		 //                                   position.coords.longitude);
 
-	      myPos = pos;
-	      self.myPos = pos;
-	
-      	  var marker = new google.maps.Marker({
-		    position: pos,
-		    map: map,
-		    title: 'Me'
-		  });
 
-      	  if(locations) {
-      	  	for(var i=0; i < locations.length; i++)
-  	  			self.addMarker(new google.maps.LatLng(locations[i][0],
-	                                       locations[i][1]), locations[i][2])
-      	  }
+		 //  myPos = pos;
+		 //  self.myPos = pos;
 
-	    })
+			// var marker = new google.maps.Marker({
+		 //    position: pos,
+		 //    map: map,
+		 //    title: 'Me'
+		 //  });
+
+		  if(locations) {
+		  	for(var i=0; i < locations.length; i++)
+	  			self.addMarker(new google.maps.LatLng(locations[i][0],
+	                                   locations[i][1]), locations[i][2])
+		  }
+		// })
 
 	}
 
