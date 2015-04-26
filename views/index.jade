@@ -36,6 +36,7 @@ block content
           tr(id='#{item._id}')
             td
               | #{item.rawText}
+              .contacts
             td
               button(class="help btn btn-sm" text="Help")
                 |Help!
@@ -50,31 +51,31 @@ block content
   div(class="row")
     div(class="col-md-4")
       h3
-        | You can meetup with 
+        | You can meetup with
         a(href="#",target="_modal")
           | John
       div(class="col-md-3")
         div(class="map-container")
-        a(target="_modal", href="javascript:;", data-target="#myModal", data-toggle="modal", class="map-opener") 
+        a(target="_modal", href="javascript:;", data-target="#myModal", data-toggle="modal", class="map-opener")
           | LOCATION
       p(class="col-md-9")
-        | Both you and 
+        | Both you and
         a(href="#",target="_modal")
           | John
-        | will be together at 
+        | will be together at
         a(href="#" target="_modal")
           | Borisova Gradina
         | at 5:00 Monday
     div(class="col-md-4")
       h3
         | Bad weather warning for 20th April
-      p 
+      p
         | A bad weather
         span(style="color:#aaaaff")
           | 12 C with
         span(style="color:light-blue")
           | rain
-        | is expected for 20th April, should you reconsider going to 
+        | is expected for 20th April, should you reconsider going to
         a(href="#" target="_modal")
           | Zapaden Park
       img(class="weather-forecast-img",src="/content/rain.png")
@@ -85,13 +86,13 @@ block content
           |  vodka
         | nearby
       p
-        | There are 
+        | There are
         a(href="#",target="_modal")
           | places nearby
         | which sell
         a(href="#",target="_modal")
           |  vodka
-        | you can do the 
+        | you can do the
         a(href="#",target="_modal")
           | Pick up a vodka on my wa...
         | task.
@@ -99,10 +100,10 @@ block content
   div(class="row")
     div(class="col-md-10 col-md-offset-1 text-center")
       br
-      | Was this autohelp usefull? You can see all 
+      | Was this autohelp usefull? You can see all
       a(href="#",target="_modal")
         | autohelp
-      | for your 
+      | for your
       a(href="#" target="_modal")
         | upcomming tasks
 
