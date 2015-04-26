@@ -7,7 +7,6 @@ var overpassApi = require('../helpers/overpassApi');
 var User = require('../models/user');
 var accessTokenModel = require('../models/accessToken');
 var search = require('../data/search');
-var openStreetMapsApi = require('../helpers/openStreetMapsApi');
 
 var formattingPipeline = require('../helpers/formattingPipeline');
 var regexAddressFormatter = require("../helpers/formatters/regexAddress");
@@ -100,7 +99,6 @@ router.get('/', function(req, res, next) {
 
 
 
-
 	var model = posApi.syntaxAnalysis("drive Jon from Svoge Iskarski Prolom 5 to Opulchenska.")
 
   	console.log(model);
@@ -138,14 +136,13 @@ router.get('/', function(req, res, next) {
         //});
 	//});
 
-
   var contactFormater = require('../helpers/formatters/contactFormater');
   var searchFormatter = require('../helpers/formatters/searchFormatter')
   formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter,addressFormatter,atAddressFormatter, contactFormater, searchFormatter],function(model){
     console.log('\n');
     console.log(model);
     console.log('finished model');
-
+   
     openStreetMapsApi.find("amenity","bar",42.6930319,23.3206504,function(err,data){
       // console.log(data.body);
       res.render('index', { title: 'Express'});
