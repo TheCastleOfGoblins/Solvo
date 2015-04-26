@@ -5,7 +5,7 @@ function format(model, callback){
 	var google = require('google');
 	var wikiAPi = require('../wikiAPi');
 	var bingApi = require('../../data/search');
-	
+
 	var queryForSearch = '';
     var objectForSearch = '';
     var found = false;
@@ -32,18 +32,18 @@ function format(model, callback){
     var async = require('async');
     async.parallel({
 	   google: function(cb){
-	    	google.resultsPerPage = 3;
-			var nextCounter = 0;
-	        google(queryForSearch, function (err, next, links){
-	        	console.log(links);
-				if(err){
-					console.log(err);
-					cb(null, null)
-				}else{
-					cb(null, links);
-				}
-			});	
-    	// cb(null, null);
+	    	// google.resultsPerPage = 3;
+			// var nextCounter = 0;
+	        // google(queryForSearch, function (err, next, links){
+	        	// console.log(links);
+				// if(err){
+					// console.log(err);
+					// cb(null, null)
+				// }else{
+					// cb(null, links);
+				// }
+			// });
+    	cb(null, null);
 	    },
 	    wiki: function(cb){
 	        wikiAPi.searchObject(objectForSearch,function(err, wikiData){
@@ -56,21 +56,21 @@ function format(model, callback){
     		});
 	    },
 	    bing: function (cb){
-	    	bingApi.find(queryForSearch, function(err, bingData){
-	    		if(err){
-	    			console.log(err);
-	    			cb(null, null);
-	    		}else{
-	    			cb(null, bingData);
-	    		}
-	    	});
-    		//cb(null, null)
+	    	// bingApi.find(queryForSearch, function(err, bingData){
+	    	// 	if(err){
+	    	// 		console.log(err);
+	    	// 		cb(null, null);
+	    	// 	}else{
+	    	// 		cb(null, bingData);
+	    	// 	}
+	    	// });
+    		cb(null, null)
 	    }
 	},
 	function(err, info){
 
 		model.push(info);
-		
+
 		callback(model);
 	});
 }
