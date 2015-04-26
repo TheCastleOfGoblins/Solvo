@@ -12,6 +12,7 @@ var todos = require('./routes/todos');
 var users = require('./routes/users');
 var contacts = require('./routes/contacts');
 var locations = require('./routes/locations');
+var reminders = require('./routes/reminders');
 var passport = require('passport');
 var app = express();
 
@@ -56,7 +57,7 @@ app.use('/todos', todos);
 app.use('/users', users);
 app.use('/contacts', contacts);
 app.use('/locations', locations);
-
+app.use('/reminders', reminders);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

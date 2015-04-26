@@ -99,7 +99,7 @@ router.get('/', function(req, res, next) {
 
 
 
-	var model = posApi.syntaxAnalysis("Go fishing on 1/03/2017 at 11 AM with Dimiter Smith and Nia Naydenova and Snejana Spasova")
+	var model = posApi.syntaxAnalysis("drive Jon from Svoge Iskarski Prolom 5 to Opulchenska.")
   	console.log(model);
 
 	var request = require('request');
