@@ -32,7 +32,7 @@ function matchSingleModel(model, filters, singleName){
 }
 
 function format (model, callback) {
-
+	console.log("Contact Formatter for " + model.raw);
 	var async = require('async');
 	var _ = require('underscore');
 	var numberOfContacts = 0;
