@@ -146,3 +146,10 @@ hr.short
 .modal-dialog {
 	width: 795px;
 }
+a:hover{
+	text-decoration:none;
+}
+
+div.text-center button{
+	margin-right: 10px;
+}
