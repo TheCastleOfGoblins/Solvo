@@ -8,10 +8,11 @@ function getWeather(coords, queryDate, callback) {
 	) + 1;
 
 	request.get("http://api.openweathermap.org/data/2.5/forecast/daily?lat="+coords.lat+"&lon="+coords.lon+"&cnt="+daysCnt+"&mode=json", function(err, response){
-		if(err) {
+		if(err || response.statusCode == 500) {
 			callback(err);
 		}else {
 			var body = JSON.parse(response.body);
+			body.list.sort(function(a,b){return a-b;});
 			var data = body.list[body.list.length-1];
 			var KELVIN_TO_CELSIUS = 273.15;
 
