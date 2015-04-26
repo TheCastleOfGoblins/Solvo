@@ -11,7 +11,7 @@ var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
 
 function format (model, callback) {
-  console.log("address Formatter for " + model.raw)
+  console.log("address Formatter for " + model.raw);
   var offset = 0;
 
   var matched = false;

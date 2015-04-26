@@ -30,7 +30,7 @@ function match (model, pattern){
   for(var i = 0; i < model.length - pattern.length + 1; i++){
     if(matchFromIndex(model,i,pattern)){
       matchLocations.push(i);
-      i += pattern.length;
+      i += pattern.length - 1;
     }
   }
   return matchLocations;

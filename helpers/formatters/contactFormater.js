@@ -12,10 +12,12 @@ function findContactsLike(name, callback){
 function matchSingleModel(model, filters, singleName){
 	var offset = 0;
 	var numberOfContacts = 0;
-	modelPattern.match(model,filters).forEach(function(idx){
-  		
+	
+	modelPattern.match(model,filters).forEach(function(idx, e, a){ ;
+  		console.log(idx, e, a, model, singleName)
     	var likeStatment = '';
     	if(singleName){
+
     		likeStatment = model[idx][0];
   			model[idx] = [ likeStatment , 'Contacts'];
     	}else{
@@ -26,8 +28,9 @@ function matchSingleModel(model, filters, singleName){
   			model.splice(idx , 2, [ likeStatment , 'Contacts' ]);
     	}
     	numberOfContacts ++;
-	  	
+	  	console.log(idx, e, a, model, singleName)
   	});
+
   	return numberOfContacts;	
 }
 
@@ -37,18 +40,7 @@ function format (model, callback) {
 	var _ = require('underscore');
 	var numberOfContacts = 0;
 
-	// var offset = 0;
-	// modelPattern.match(model,[
-	//     {type : 'NN',regex:/^[A-Z][a-z0-9_-]+$/},
-	//     {type : 'NN',regex:/^[A-Z][a-z0-9_-]+$/}
- //  	]).forEach(function(idx){
- //  		idx += offset;
- //    	offset -= 1;
-
- //    	numberOfContacts ++;
-	//   	var likeStatment = model[idx][0] + ' ' +  model[idx + 1][0];
- //  		model.splice(idx , 2, [ likeStatment , 'Contacts' ]);
- //  	});
+	
 
 
   	numberOfContacts += matchSingleModel(model,[{type : 'NN',regex:/^[A-Z][a-z0-9_-]+$/},
@@ -89,15 +81,18 @@ function format (model, callback) {
 
   	if(numberOfContacts == 0){
   		callback(model);
+  		return;
   	}
 	var makeFinalCallback = _.after(numberOfContacts, function(db, model){
 														db.close();
 														callback(model);
 													});
 	dbApi.openConnection(function(db){
+		
 		modelPattern.match(model,[
 		    {type : 'Contacts'}
 	  	]).forEach(function(idx){
+	  		
 	  		findContactsLike(model[idx][0] , function(err, contacts){
 	  			if(contacts.length != 0){
 	  				model[idx][0] = contacts;
@@ -108,7 +103,7 @@ function format (model, callback) {
 	  			}
 	  			makeFinalCallback(db, model);
 	  		});
-	  		// console.log(model[idx]);
+	  		
 	  	});
 	});
 	// db.close();

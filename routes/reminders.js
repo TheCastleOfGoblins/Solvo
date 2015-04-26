@@ -4,7 +4,6 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
 	reminderSearch.getRemindersForDate( req.session.passport.user.id, Date.now(), function(err, result){
-		
 		res.json(result);
 	})
 });

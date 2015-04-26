@@ -137,16 +137,15 @@ router.get('/', function(req, res, next) {
 	//});
 
   var contactFormater = require('../helpers/formatters/contactFormater');
-  var searchFormatter = require('../helpers/formatters/searchFormatter')
+  var searchFormatter = require('../helpers/formatters/searchFormatter');
+  
   formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter,addressFormatter,atAddressFormatter, contactFormater, searchFormatter],function(model){
     console.log('\n');
     console.log(model);
     console.log('finished model');
+   	
    
-    openStreetMapsApi.find("amenity","bar",42.6930319,23.3206504,function(err,data){
-      // console.log(data.body);
-      res.render('index', { title: 'Express'});
-    });
+  	res.render('index', { title: 'Express'});
   });
 });
 
@@ -166,3 +165,4 @@ router.get('/weather', function(req, res, next) {
 });
 
 module.exports = router;
+ 
