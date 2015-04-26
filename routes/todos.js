@@ -29,7 +29,7 @@ router.post('/resolve', function(req, res, next) {
 
 
 router.post('/insert', function(req, res, next) {
-	console.log(req.body.rawText, req.body.rawText[0], ['!','?','.'].indexOf(req.body.rawText[0]))
+	
 	if(['!','?','.'].indexOf(req.body.rawText[req.body.rawText.length - 1]) < 0){
 		req.body.rawText +='.';
 	}
