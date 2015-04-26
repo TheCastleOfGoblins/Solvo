@@ -9,7 +9,6 @@ $(document).ready(function () {
 				toDosSemanticInfo[response._id] = response.syntaxAnalysis;
 				$('#to-do').val('');
         response.syntaxAnalysis.forEach(function(word) {
-          console.log(word[1]);
           if(word[1] == 'Contacts') {
             appendContacts(word[0]);
           }
@@ -29,7 +28,15 @@ $(document).ready(function () {
 	});
 
 	$('.resolve').click(function(){
-
+		var id = $(this).parents('tr').attr('id');
+		var self = this;
+		console.log(id);
+		$.post('/todos/resolve',{todoId:id}, function(response){
+			console.log(response);
+			if(response.ok == 1){
+				$(self).parents('tr').fadeOut();
+			}
+		});
 	})
 	$('.help').click(function(){
 		var self = this;

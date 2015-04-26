@@ -116,6 +116,8 @@ router.post('/runActions', function(req, res, next) {
     		model.time = new Date();
     
     		actions.run(model, function(model){
+    			
+    			model.response.raw = todos[0].rawText;
     			res.json(model.response);
     		});
 	
