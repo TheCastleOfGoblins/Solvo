@@ -100,7 +100,7 @@ router.get('/', function(req, res, next) {
 
 
 
-	var model = posApi.syntaxAnalysis("Go fishing on 1/03/2017 at 11 AM with Ivan and Nia and Snejana Spasova")
+	var model = posApi.syntaxAnalysis("Go for lunch on 1/03/2017 at 11 AM with Ivan and Nia and Snejana Spasova")
   	console.log(model);
 
 	var request = require('request');
@@ -138,13 +138,14 @@ router.get('/', function(req, res, next) {
 
 
   var contactFormater = require('../helpers/formatters/contactFormater');
-  formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter,addressFormatter,atAddressFormatter, contactFormater],function(model){
+  var searchFormatter = require('../helpers/formatters/searchFormatter')
+  formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter,addressFormatter,atAddressFormatter, contactFormater, searchFormatter],function(model){
     console.log('\n');
     console.log(model);
     console.log('finished model');
 
     openStreetMapsApi.find("amenity","bar",42.6930319,23.3206504,function(err,data){
-      console.log(data.body);
+      // console.log(data.body);
       res.render('index', { title: 'Express'});
     });
   });

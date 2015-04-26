@@ -17,7 +17,7 @@ function find (query, callback) {
 
   request.get(options,function(err, response){
     var body = JSON.parse(response.body); 
-    callback(err, body.d.results[0]);
+    callback(err, body.d.results.slice(0, 2));
   });
 }
 
