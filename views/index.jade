@@ -129,12 +129,20 @@ block content
           div(class="modal-header")
             button(type="button",class="close",data-dismiss="modal",aria-label="Close")
               span(aria-hidden="true")&times;
-            h4(class="modal-title")
-              | Modal title
           div(class="modal-body")
-            div(class="map-container")
+            div(class="container-fluid")
+              div(class="row")
+                div(class="col-md-5")
+                  div(id='task-raw',class="text-center")
+                    hr
+                    | Go to the cinema with Jenny at 13 May 2015.
+                    hr
+                div(class="col-md-7")
+                  iframe(width="100%",height="450",frameborder="0",style="border:0",src="https://www.google.com/maps/embed/v1/place?q=Svoge,Bulgaria&key=AIzaSyBHGpzUbuMA_LU4jrOikW_EEhIyXpVA2ZU")
           div(class="modal-footer")
             button(type="button",class="btn btn-default",data-dismiss="modal")
               | Close
             button(type="button",class="btn btn-primary")
               | Save changes
+            button(type="button",class="btn btn-checkbox")
+              | &#x2713;
