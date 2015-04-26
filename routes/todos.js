@@ -100,16 +100,18 @@ router.get('/', function(req, res, next) {
     	});
   	});
 });*/
-router.get('/runActions', function(req, res, next) {
+router.post('/runActions', function(req, res, next) {
+	
 	dbApi.openConnection(function(db){
-		Todo.find({ _id: req.query.id }, function(err, todo){
+		
+		Todo.find({ _id: req.body.id }, function(err, todos){
 			var actions = require('../helpers/actions');
-
-			var model = todo.syntaxAnalysis;
+			
+			var model = todos[0].syntaxAnalysis;
 			model.request = req;
 			model.location = {
-      			lat : req.query.lat,
-      			lon : req.query.lon
+      			lat : req.body.lat,
+      			lon : req.body.lon
     		};
     		model.time = new Date();
     
