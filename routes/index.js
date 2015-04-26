@@ -95,8 +95,8 @@ router.get('/', function(req, res, next) {
   format.run(model,function(model){
     model.request = req;
     model.location = {
-      longtitude : 42.6930319,
-      latitude : 23.3206504
+      lat : 42.6930319,
+      lon : 23.3206504
     }
     model.time = new Date();
     
