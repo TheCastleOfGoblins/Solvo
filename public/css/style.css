@@ -10,6 +10,7 @@ h3
 }
 a
 {
+    margin-right: 12px;
 	color:#44408E;
 	font-weight:bold;
 }
@@ -22,6 +23,7 @@ a[target='_modal']:after
 	background:url('popout.png');
 	background-size: 100%; 100%;
     background-repeat: no-repeat;
+    margin-left: 4px;
 }
 main
 {
