@@ -102,7 +102,9 @@ router.get('/', function(req, res, next) {
 
   dbApi.openConnection(function(db){
     Todo.find({"userId":req.session.passport.user._id, 'isResolved':false}).limit(5).exec(function(err,todos){
-
+      
+      todos = todos || [];
+      console.log(err);
       var templateParameters = {
         'title':"Solvo Homepage",
         'pageTitle': "Solvo Tasks",

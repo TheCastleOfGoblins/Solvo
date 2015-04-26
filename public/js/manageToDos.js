@@ -111,7 +111,7 @@ $(document).ready(function () {
 					var self = this;
 
 					$.post('/todos/resolve',{todoId:id}, function(response){
-						console.log(response);
+						console.log(response)
 						if(response.ok == 1){
 							$(self).parents('tr').fadeOut(function(){
 								$(self).parents('tr').remove();
@@ -165,7 +165,6 @@ $(document).ready(function () {
 		if (e.which == 13) {
 			e.preventDefault();
     		$('#submitToDo').click();
-    		$(self).off('keydown');
 		}
 	});
 

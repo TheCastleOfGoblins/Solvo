@@ -94,6 +94,12 @@ function format (model, callback) {
 	  	]).forEach(function(idx){
 	  		
 	  		findContactsLike(model[idx][0] , function(err, contacts){
+
+	  			if(!contacts){
+	  				makeFinalCallback(db, model);
+	  				return;
+	  			}
+	  			console.log(err, contacts);
 	  			if(contacts.length != 0){
 	  				model[idx][0] = contacts;
 	  			}else{
