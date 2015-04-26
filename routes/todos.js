@@ -66,9 +66,9 @@ router.post('/insert', function(req, res, next) {
 
 
 // for testing
-router.get('/', function(req, res, next) {
+/*router.get('/', function(req, res, next) {
 	res.render('insertTodo', { title: 'Express' });
-});
+});*/
 router.post('/location', function(req, res, next) {
 	dbApi.openConnection(function(db){
 		Todo.update(
@@ -80,5 +80,48 @@ router.post('/location', function(req, res, next) {
 		});
 	});
 });
+
+
+
+/*var posApi = require('../helpers/posApi');
+
+router.get('/', function(req, res, next) {
+	var model = posApi.syntaxAnalysis(req.body.rawText);
+	format.run(model,function(model){
+		model.request = req;
+		model.location = {
+      		lat : req.body.lat,
+      		lon : req.body.lon
+    	}
+    	model.time = new Date();
+    
+    	actions.run(model,function(model){
+    		res.json(model);
+    	});
+  	});
+});*/
+router.get('/findOne', function(req, res, next) {
+	dbApi.openConnection(function(db){
+		Todo.find({ _id: req.query.id }, function(err, todo){
+			var actions = require('../helpers/actions');
+
+			var model = todo.syntaxAnalysis;
+			model.request = req;
+			model.location = {
+      			lat : req.query.lat,
+      			lon : req.query.lon
+    		};
+    		model.time = new Date();
+    
+    		actions.run(model, function(model){
+    			res.json(model.response);
+    		});
+	
+			db.close();
+
+		});
+	});
+});
+
 
 module.exports = router;

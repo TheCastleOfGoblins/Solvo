@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	div(class="col-md-4")
+		h3
+			| Weather forecast for #{weather.dt}
+	    p 
+	        | #{weather.weather.main}
+	        span(style="color:#aaaaff")
+	        	| #{weather.avgTemp} with
+	        span(style="color:light-blue")
+	        	| #{weather.weather.description}
+	        	| is expected, should you reconsider going to #{location}
+	    img(class="weather-forecast-img",src="#{weatherPic}")

@@ -98,7 +98,6 @@ router.get('/', function(req, res, next) {
 	var model = posApi.syntaxAnalysis("find a restaurant to go with Kosta");
 
  
-    
   var Todo = require('../models/todo');
   console.log('EMi e');
   dbApi.openConnection(function(db){
