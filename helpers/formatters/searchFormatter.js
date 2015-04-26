@@ -1,7 +1,7 @@
 var modelPattern = require('../modelPattern');
 
 function format(model, callback){
-	console.log('pipe serch mama:');
+	console.log('pipe serch mama: ' + model.raw);
 	var google = require('google');
 	var wikiAPi = require('../wikiAPi');
 	var bingApi = require('../../data/search');
@@ -9,6 +9,7 @@ function format(model, callback){
 	var queryForSearch = '';
     var objectForSearch = '';
     var found = false;
+
     model.forEach(function(token, index){
     	if(['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'JJ', 'JJR', 'JJS', 'RB', 'RBR', 'RBS'].indexOf(token[1]) > -1 ){
     		queryForSearch += token[0] + ' ';
@@ -64,7 +65,9 @@ function format(model, callback){
 	    }
 	},
 	function(err, info){
+
 		model.push(info);
+		console.log(model);
 		callback(model);
 	});
 }
