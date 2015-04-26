@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet",href="/css/theme.min.css")
+    link(rel="stylesheet",href="/css/style.css")
+    link(href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed',rel='stylesheet',type='text/css')
+    link(href='http://fonts.googleapis.com/css?family=Nothing+You+Could+Do',rel='stylesheet',type='text/css')
+    script(src="/js/jquery.js")
+    script(src="/js/bootstrap.min.js")
+    script(src="https://maps.googleapis.com/maps/api/js?v=3.exp")
+    script(src="/js/home.js")
+
+  body
+    main(class="container")
+      header(class="row")
+        div(class="col-md-1")
+          img(class="logo",src="/content/logo.png")
+        div(class="col-md-11")
+          div(class="row")
+            header(class="col-md-12")
+              div(class="site-title")
+                | Sol
+                span(style="color:#FFC6C7;")
+                  | v
+                | o
+              div(class="site-lead-line")
+                | Never do anything by yourself again.
+
+          div(class="text-center")
+            p(class="lead success")
+                | If you spend too much time thinking about a thing, you'll never get it done. Let Solvo do it for you!
+            p(class="lead success")
+                | Get started!
+
+            a(href="/auth/facebook" class="btn btn-info btn-lg")
+                | Login with Facebook
+
+            p
+            p
+                img(class="logo",src="/content/logo.png")

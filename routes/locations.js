@@ -4,7 +4,7 @@ var router = express.Router();
 var Location = require('../models/location');
 
 router.get('/', function(req, res, next) {
-	res.render('insertLocation', { title: 'Express' });
+	res.render('insertLocation', { title: 'Add Location', pageTitle: 'Add Location' });
 });
 
 router.post('/create', function(req, res, next) {
@@ -14,11 +14,12 @@ router.post('/create', function(req, res, next) {
 	});
 	dbApi.openConnection(function(db){
       newLocation.save(function(err, saved){
-			res.json(saved);
+			// res.json(saved);
 			db.close();
 		});
 	});
 
+  res.redirect('/');
 });
 
 router.get('/list', function(req, res, next) {
