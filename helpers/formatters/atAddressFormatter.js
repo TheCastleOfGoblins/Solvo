@@ -29,7 +29,7 @@ function format (model, callback) {
       if(model[i][1] != "NNP" && model[i][1] != "CD" && model[i][1] != "NN" ){
         if(typeof(model[i-1][0]) == "string" && ( addressEndings.indexOf(model[i-1][0]) > 0 || model[i-1][1] == "CD")){
           anyMatched = true;
-          var address = 'Bulgaria ' + model.slice(next-1, i).map(function(n){
+          var address = 'Bulgaria Sofia ' + model.slice(next-1, i).map(function(n){
             return n[0];
           }).join(' ');
           addressEndings.forEach(function(ending){
@@ -62,7 +62,7 @@ function format (model, callback) {
       if(model[i][1] != "NNP" && model[i][1] != "CD" && model[i][1] != "NN" ){
         if(typeof(model[i-1][0]) == "string" && ( addressEndings.indexOf(model[i-1][0]) > 0 || model[i-1][1] == "CD")){
           anyMatched = true;
-          var address = 'Bulgaria ' + model.slice(next-1, i).map(function(n){
+          var address = 'Bulgaria Sofia ' + model.slice(next-1, i).map(function(n){
             return n[0];
           }).join(' ');
           addressEndings.forEach(function(ending){

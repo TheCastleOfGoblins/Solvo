@@ -1,10 +1,9 @@
-function action(model, callback, finalCallback){
+function act (model, callback, finalCallback){
 	model.response.contactForm = true;
-  	model.response.loggedInUser = model.request.session.passport.user.username
+  	model.response.loggedInUser = 1;//req.session.passport_id;
+  	console.log(model.response);
 
-
-
-  	return questionTemplate(from, to, question);
+  	//return questionTemplate(from, to, question);
 }
 
-module.exports.action = action;
+module.exports.act = act;
