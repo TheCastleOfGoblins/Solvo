@@ -90,7 +90,7 @@ router.get('/', function(req, res, next) {
 
 	var wikiAPi = require('../helpers/wikiAPi');
 
-	var model = posApi.syntaxAnalysis("drive Jon from Svoge Iskarski Prolom 5 to Opulchenska.")
+	var model = posApi.syntaxAnalysis("buy shoes at 11/11/2020")
 
   format.run(model,function(model){
     model.request = req;

@@ -1,5 +1,11 @@
 {
   "synonyms" : {
+      "buy" : "buy",
+      "purchase" : "buy",
+      "aquire" : "buy",
+      "obtain" : "buy",
+      "get" : "buy",
+      
       "question": "ask",
       "inquire": "ask",
 
@@ -17,19 +23,18 @@
       "email": "write",
       "message": "write",
 
-      "cleaned": "washed",
-
+      "cleaned": "washed"
   },
   "baseVerbs": [
-      "ask", //email template, user, 
+      "ask", 
       "take", 
-      "buy", //map with shops
-      "visit", //map with address + directions
+      "buy", 
+      "visit",
       "book", 
-      "play", //weather
-      "call", //
+      "play",
+      "call",
       "write",
       "washed",
-      "meet", //
-  ],
+      "meet"
+  ]
 }
