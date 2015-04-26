@@ -86,8 +86,10 @@ function format (model, callback) {
 
   	numberOfContacts += matchSingleModel(model,[{type : 'NN',regex:/^[A-Z][a-z0-9_-]+$/}],
   																					true);
-  	
 
+  	if(numberOfContacts == 0){
+  		callback(model);
+  	}
 	var makeFinalCallback = _.after(numberOfContacts, function(db, model){
 														db.close();
 														callback(model);
