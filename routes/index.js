@@ -17,6 +17,7 @@ var dateFormatter = require("../helpers/formatters/dateFormatter");
 var dateTimeFormatter = require("../helpers/formatters/dateTimeFormatter");
 var addressFormatter = require("../helpers/formatters/addressFormatter");
 var atAddressFormatter = require("../helpers/formatters/atAddressFormatter");
+var entityMapper = require("../helpers/entityMapper");
 
 var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy;
