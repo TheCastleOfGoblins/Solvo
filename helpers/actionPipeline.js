@@ -6,11 +6,11 @@ function act (syntacticModel, actions, callback) {
   }(0,callback,callback);
   actions.reverse(); 
   for(var i = 0; i < actions.length; i++){
-    current = function(cur,fromatingFunction,finalCallback){
+    current = function(cur,actingFunction,finalCallback){
       return function(model){
         console.log('\n');
         console.log(model);
-        fromatingFunction(model, cur, finalCallback);
+        actingFunction(model, cur, finalCallback);
       };
     }(current,actions[i].act, callback);
   }
