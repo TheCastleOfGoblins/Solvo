@@ -7,6 +7,7 @@ var overpassApi = require('../helpers/overpassApi');
 var User = require('../models/user');
 var accessTokenModel = require('../models/accessToken');
 var search = require('../data/search');
+var openStreetMapsApi = require('../helpers/openStreetMapsApi');
 
 var formattingPipeline = require('../helpers/formattingPipeline');
 var regexAddressFormatter = require("../helpers/formatters/regexAddress");
@@ -15,6 +16,8 @@ var baseTimeFormatter = require("../helpers/formatters/baseTimeFormater");
 var weekdayFormatter = require("../helpers/formatters/weekdayFormatter");
 var dateFormatter = require("../helpers/formatters/dateFormatter");
 var dateTimeFormatter = require("../helpers/formatters/dateTimeFormatter");
+var addressFormatter = require("../helpers/formatters/addressFormatter");
+var atAddressFormatter = require("../helpers/formatters/atAddressFormatter");
 
 var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy;
@@ -97,9 +100,8 @@ router.get('/', function(req, res, next) {
 
 
 
-	var model = posApi.syntaxAnalysis("Go fishing on 1/03/2017 at 11 AM")
-  console.log(model);
-
+	var model = posApi.syntaxAnalysis("Go fishing on 1/03/2017 at 11 AM with Dimiter Smith and Nia Naydenova and Snejana Spasova")
+  	console.log(model);
 
 	var request = require('request');
 
@@ -134,11 +136,17 @@ router.get('/', function(req, res, next) {
         //});
 	//});
 
-  formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter],function(model){
+
+  var contactFormater = require('../helpers/formatters/contactFormater');
+  formattingPipeline.format(model,[weekdayFormatter,baseTimeFormatter,dateFormatter,dateTimeFormatter,addressFormatter,atAddressFormatter, contactFormater],function(model){
     console.log('\n');
     console.log(model);
     console.log('finished model');
-    res.render('index', { title: 'Express', username: req.session.passport.user.name/*,links:links , taggedWords:taggedWords */});
+
+    openStreetMapsApi.find("amenity","bar",42.6930319,23.3206504,function(err,data){
+      console.log(data.body);
+      res.render('index', { title: 'Express'});
+    });
   });
 });
 
