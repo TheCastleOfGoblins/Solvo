@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  script(type='text/javascript' src='/js/manageToDos.js')
   div(class="row")
     div(class="col-md-1")
     div(class="col-md-10")
@@ -12,7 +13,7 @@ block content
         div(class="text-center")
           button(type="submit",class="btn btn-primary")
             | Help me with this!
-          button(type="submit",class="btn btn-info")
+          button(id='submitToDo',type="submit",class="btn btn-info")
             | Save for later
     div(class="col-md-1")
   div(class="row")
