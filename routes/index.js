@@ -142,15 +142,11 @@ router.get('/', function(req, res, next) {
     console.log('\n');
     console.log(model);
     console.log('finished model');
-<<<<<<< HEAD
-    res.render('index', { title: 'Express', /*username: req.session.passport.user.name,links:links , taggedWords:taggedWords */});
-=======
-
+   
     openStreetMapsApi.find("amenity","bar",42.6930319,23.3206504,function(err,data){
       // console.log(data.body);
       res.render('index', { title: 'Express'});
     });
->>>>>>> a7c0f778dd76b0880cf440e5cb508fb16b9615f0
   });
 });
 
