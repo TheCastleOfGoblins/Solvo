@@ -24,24 +24,26 @@ block content
           | Stuff I have to do.
           a(href="#",target="_modal",data-toggle="modal",data-target="#myModal")
             | See all tasks
-
-
-        div(class="row")
-          div(class="col-md-1")
-          each item in todos
-            div(id='#{item._id}' class="col-md-2")
-              div(class="row")
-                | #{item.rawText}
-                .contacts
-              div(class="row")
-                div(class="col-md-10")
-                  button(class="help btn btn-sm" text="Help")
-                    |Help!
-                div(class="col-md-2")
-                  div(class="checkbox")
-                    input(type="checkbox" class='resolve')
-          div(class="col-md-1")
-
+      table(class="table table-condensed table-hover")
+        thead
+          tr
+            th
+              | Task:
+            th
+              | Options
+            th
+        tbody
+        each item in todos
+          tr(id='#{item._id}' data-id='#{item._id' data-task)
+            td
+              | #{item.rawText}
+              .contacts
+            td
+              button(class="help btn btn-sm" text="Help")
+                |Help!
+            td
+              div(class="checkbox")
+                input(type="checkbox" class='resolve')
     div(class="col-md-1")
   div(class="row")
     div(class="col-md-10 col-md-offset-1 text-center")
