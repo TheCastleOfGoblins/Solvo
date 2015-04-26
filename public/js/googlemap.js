@@ -3,13 +3,12 @@ markers = [];
 
 
 function DeleteMarkers() {
-
-        //Loop through all the markers and remove
-        for (var i = 0; i < markers.length; i++) {
-            markers[i].setMap(null);
-        }
-        markers = [];
+    //Loop through all the markers and remove
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
     }
+    markers = [];
+}
 
 function initialize() {
   var mapCanvas = document.getElementById('map-canvas');

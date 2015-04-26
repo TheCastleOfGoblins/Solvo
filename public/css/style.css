@@ -158,6 +158,7 @@ div.text-center button{
 
 td {
     padding: 7px;
+    cursor: pointer;
 }
 .modal-dialog{
   width:90%;
