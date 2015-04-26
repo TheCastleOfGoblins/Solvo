@@ -37,6 +37,13 @@ header
 	height:190px;
 }
 
+
+header.login
+{
+	margin-top:5px;
+	height:100px;
+}
+
 .site-title, .site-lead-line
 {
 	font-weight:bold;
@@ -180,8 +187,10 @@ td {
   font-size:2em;
   font-style:italic;
 }
+
 #taskMapCanvas {
   width:100%;
   height:250px;
   margin-bottom:25px;
 }
+
