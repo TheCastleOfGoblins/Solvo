@@ -59,10 +59,7 @@ function something(type){
 }
 
 function mapShops(type,longtitude,latitude,callback){
-  var s = shop(type);
-  console.log('###########################################################shops');
-  console.log
-  console.log(s);
+  var s = shops[type];
   openStreetMapsApi.find("shop",s,longtitude,latitude,function(err,data){
     data.openStreetMapResultType = s;
     callback(err,data)
@@ -70,7 +67,7 @@ function mapShops(type,longtitude,latitude,callback){
 }
 
 function mapAmenity(type,longtitude,latitude,callback){
-  var a = amenity(type);
+  var a = amenity[type];
   console.log(a);
   openStreetMapsApi.find("amenity",a,longtitude,latitude,function(err,data){
     data.openStreetMapResultType = a;

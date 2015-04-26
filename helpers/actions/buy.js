@@ -6,7 +6,6 @@ function onlyUnique(value, index, self) {
 }
 
 function act (model, callback, finalCallback) {
-
   var recognize = false;
   var objects = modelPattern.match(model,[
     {typeList : ['NN','NNP','NNPS','NNS']},
