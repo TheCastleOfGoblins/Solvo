@@ -9,6 +9,8 @@ function act (model, callback, finalCallback) {
     model.response.subActions.push('go');
     var location = (model.response.addresses.length ? model.response.addresses[0] : model.location);
     var time = (model.response.dateTimes.length ? model.response.dateTimes[0] : model.time);
+    console.log(location);
+    console.log(time);
     weatherApi.getWeather(
       location, time,
       function(err, forecast) {
