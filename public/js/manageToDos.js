@@ -5,7 +5,7 @@ $(document).ready(function () {
 
 		$.post('/todos/insert/', {rawText:$('#to-do').val()} , function(response){
 			if(response._id){
-				// console.log(response);
+				console.log(response);
 				toDosSemanticInfo[response._id] = response.syntaxAnalysis;
 				$('#to-do').val('');
         response.syntaxAnalysis.forEach(function(word) {
