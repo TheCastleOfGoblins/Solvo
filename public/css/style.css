@@ -37,6 +37,13 @@ header
 	height:190px;
 }
 
+
+header.login
+{
+	margin-top:5px;
+	height:100px;
+}
+
 .site-title, .site-lead-line
 {
 	font-weight:bold;
