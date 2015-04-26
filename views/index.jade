@@ -4,16 +4,17 @@ block content
   script(src='/js/manageToDos.js')
   div(class="row")
     div(class="col-md-1")
-    div(class="col-md-10")
-      div(class="form-group")
-        label(for="to-do")
-          | I have something to do now... :
-        textarea(rows="5",class="form-control",id="to-do",placeholder="Just tell us what you want to do and we will help.")
-      div(class="text-center")
-        button(type="submit", id='helpMe',class="btn btn-primary")
-          | Help me with this!
-        button(id='submitToDo',type="submit",class="btn btn-info")
-          | Save for later
+    div(class="col-md-6 col-md-push-2")
+      form
+        div(class="form-group")
+          label(for="to-do")
+            | I have something to do now... :
+          textarea(rows="5",class="form-control",id="to-do",placeholder="Just tell us what you want to do and we will help.")
+        div(class="text-center")
+          button(type="submit", id='helpMe',class="btn btn-primary")
+            | Help me with this!
+          button(id='submitToDo', type="submit",class="btn btn-info")
+            | Save for later
     div(class="col-md-1")
   div(class="row")
     div(class="col-md-1")
@@ -23,88 +24,89 @@ block content
           | Stuff I have to do.
           a(href="#",target="_modal",data-toggle="modal",data-target="#myModal")
             | See all tasks
-      table(class="table table-condensed table-hover")
-        thead
-          tr
-            th
-              | Task:
-            th
-              | Options
-            th
-        tbody
-        each item in todos
-          tr(id='#{item._id}')
-            td
-              | #{item.rawText}
-              .contacts
-            td
-              button(class="help btn btn-sm" text="Help")
-                |Help!
-            td
-              div(class="checkbox")
-                input(type="checkbox" class='resolve')
+
+
+        div(class="row")
+          div(class="col-md-1")
+          each item in todos
+            div(id='#{item._id}' class="col-md-2")
+              div(class="row")
+                | #{item.rawText}
+                .contacts
+              div(class="row")
+                div(class="col-md-10")
+                  button(class="help btn btn-sm" text="Help")
+                    |Help!
+                div(class="col-md-2")
+                  div(class="checkbox")
+                    input(type="checkbox" class='resolve')
+          div(class="col-md-1")
 
     div(class="col-md-1")
   div(class="row")
     div(class="col-md-10 col-md-offset-1 text-center")
       hr
   div(class="row")
-    div(class="col-md-4")
-      h3
-        | You can meetup with
-        a(href="#",target="_modal")
-          | John
-      div(class="col-md-3")
-        div(class="map-container")
-        a(target="_modal", href="javascript:;", data-target="#myModal", data-toggle="modal", class="map-opener")
-          | LOCATION
-      p(class="col-md-9")
-        | Both you and
-        a(href="#",target="_modal")
-          | John
-        | will be together at
-        a(href="#" target="_modal")
-          | Borisova Gradina
-        | at 5:00 Monday
-    div(class="col-md-4")
-      h3
-        | Bad weather warning for 20th April
-      p
-        | A bad weather
-        span(style="color:#aaaaff")
-          | 12 C with
-        span(style="color:light-blue")
-          | rain
-        | is expected for 20th April, should you reconsider going to
-        a(href="#" target="_modal")
-          | Zapaden Park
-      img(class="weather-forecast-img",src="/content/rain.png")
-    div(class="col-md-4")
-      h3
-        | Place to buy
-        a(href="#",target="_modal")
-          |  vodka
-        | nearby
-      p
-        | There are
-        a(href="#",target="_modal")
-          | places nearby
-        | which sell
-        a(href="#",target="_modal")
-          |  vodka
-        | you can do the
-        a(href="#",target="_modal")
-          | Pick up a vodka on my wa...
-        | task.
-      iframe(width="100%",height="250",frameborder="0",style="border:0",src="https://www.google.com/maps/embed/v1/place?q=Sofia%20NDK&key=AIzaSyBHGpzUbuMA_LU4jrOikW_EEhIyXpVA2ZU")
+    div(class="col-md-1")
+    div(class="col-md-10")
+      div(class="col-md-4")
+        h3
+          | You can meetup with 
+          a(href="#",target="_modal")
+            | John
+        div(class="col-md-3")
+          div(class="map-container")
+          a(target="_modal", href="javascript:;", data-target="#myModal", data-toggle="modal", class="map-opener") 
+            | LOCATION
+        p(class="col-md-9")
+          | Both you and 
+          a(href="#",target="_modal")
+            | John
+          | will be together at 
+          a(href="#" target="_modal")
+            | Borisova Gradina
+          | at 5:00 Monday
+      div(class="col-md-4")
+        h3
+          | Bad weather warning for 20th April
+        p 
+          | A bad weather
+          span(style="color:#aaaaff")
+            | 12 C with
+          span(style="color:light-blue")
+            | rain
+          | is expected for 20th April, should you reconsider going to 
+          a(href="#" target="_modal")
+            | Zapaden Park
+        img(class="weather-forecast-img",src="/content/rain.png")
+      div(class="col-md-4")
+        h3
+          | Place to buy
+          a(href="#",target="_modal")
+            |  vodka
+          | nearby
+        p
+          | There are 
+          a(href="#",target="_modal")
+            | places nearby
+          | which sell
+          a(href="#",target="_modal")
+            |  vodka
+          | you can do the 
+          a(href="#",target="_modal")
+            | Pick up a vodka on my wa...
+          | task.
+        iframe(width="100%",height="250",frameborder="0",style="border:0",src="https://www.google.com/maps/embed/v1/place?q=Sofia%20NDK&key=AIzaSyBHGpzUbuMA_LU4jrOikW_EEhIyXpVA2ZU")
+    div(class="col-md-1")
+
   div(class="row")
     div(class="col-md-10 col-md-offset-1 text-center")
       br
       | Was this autohelp usefull? You can see all
       a(href="#",target="_modal")
         | autohelp
-      | for your
-      a(href="#" target="_modal")
+      | for your 
+      a(href="#",target="_modal",data-toggle="modal",data-target="#taskList")
         | upcomming tasks
 
   div(class="modal fade",id="myModal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel",aria-hidden="true")
@@ -123,3 +125,26 @@ block content
           button(type="button",class="btn btn-primary")
             | Save changes
 
+  div(class="modal fade",id="taskList",tabindex="-1",role="dialog",aria-labelledby="taskModalLabel",aria-hidden="true")
+      div(class="modal-dialog")
+        div(class="modal-content")
+          div(class="modal-header")
+            button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+              span(aria-hidden="true")&times;
+          div(class="modal-body")
+            div(class="container-fluid")
+              div(class="row")
+                div(class="col-md-5")
+                  div(id='task-raw',class="text-center")
+                    hr
+                    | Go to the cinema with Jenny at 13 May 2015.
+                    hr
+                div(class="col-md-7")
+                  iframe(width="100%",height="450",frameborder="0",style="border:0",src="https://www.google.com/maps/embed/v1/place?q=Svoge,Bulgaria&key=AIzaSyBHGpzUbuMA_LU4jrOikW_EEhIyXpVA2ZU")
+          div(class="modal-footer")
+            button(type="button",class="btn btn-default",data-dismiss="modal")
+              | Close
+            button(type="button",class="btn btn-primary")
+              | Save changes
+            button(type="button",class="btn btn-checkbox")
+              | &#x2713;

@@ -101,14 +101,14 @@ router.get('/', function(req, res, next) {
   var Todo = require('../models/todo');
   
   dbApi.openConnection(function(db){
-    Todo.find({"userId":req.session.passport.user._id}).limit(5).exec(function(err,todos){
+    Todo.find({"userId":req.session.passport.user._id, 'isResolved':false}).limit(5).exec(function(err,todos){
       
       var templateParameters = {
         'title':"Solvo Homepage",
         'todos':todos
       }
       db.close();
-      console.log(todos);
+      
       res.render('index', templateParameters);
     });
   });

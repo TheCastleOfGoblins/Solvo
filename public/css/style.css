@@ -10,6 +10,7 @@ h3
 }
 a
 {
+    margin-right: 12px;
 	color:#44408E;
 	font-weight:bold;
 }
@@ -22,6 +23,7 @@ a[target='_modal']:after
 	background:url('popout.png');
 	background-size: 100%; 100%;
     background-repeat: no-repeat;
+    margin-left: 4px;
 }
 main
 {
@@ -156,4 +158,25 @@ div.text-center button{
 
 td {
     padding: 7px;
+}
+.modal-dialog{
+  width:90%;
+}
+.modal-header{
+  border-bottom:none;
+}
+.modal-footer{
+  background:#ff5c61;
+}
+.btn-checkbox{
+  border-radius:100%;
+  color:white;
+  background:#33cca5;
+  font-size:1.2em;
+}
+#task-raw{
+  font-family: 'Nothing You Could Do', cursive;
+  font-weight:bold;
+  font-size:3em;
+  font-style:italic;
 }
