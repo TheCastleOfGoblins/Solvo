@@ -14,12 +14,11 @@ router.post('/create', function(req, res, next) {
 	});
 	dbApi.openConnection(function(db){
       newLocation.save(function(err, saved){
-			// res.json(saved);
 			db.close();
+      res.redirect('/');
 		});
 	});
 
-  res.redirect('/');
 });
 
 router.get('/list', function(req, res, next) {
