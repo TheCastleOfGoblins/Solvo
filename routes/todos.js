@@ -43,7 +43,15 @@ router.post('/insert', function(req, res, next) {
 	var model = posApi.syntaxAnalysis(newTodo.rawText);
 
 	analysis.run(model , function(semantic){
-		
+		semantic.forEach(function(part){
+			
+			if(part[1] == 'DateTime'){
+				var dateString = part[0].date.year + '-' + part[0].date.month + '-' + part[0].date.day + '-03:00';
+				newTodo.reminderDates = [];
+				
+				newTodo.reminderDates.push(new Date(dateString));
+			}
+		});
 		newTodo.syntaxAnalysis = semantic;
 
 		dbApi.openConnection(function(db){
