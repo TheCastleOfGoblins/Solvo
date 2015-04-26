@@ -34,6 +34,9 @@ function act (model, callback, finalCallback) {
     return model[idx][0];
   });
   
+  console.log('################################verbs');
+  console.log(verbs);
+  
   var actionCandidates = [];
   
   if(verbs.length == 0){

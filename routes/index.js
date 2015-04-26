@@ -95,7 +95,7 @@ router.get('/', function(req, res, next) {
 
 	var wikiAPi = require('../helpers/wikiAPi');
 
-	var model = posApi.syntaxAnalysis("buy shoes at 11/11/2020")
+	var model = posApi.syntaxAnalysis("find a restaurant to go with Kosta");
 
   format.run(model,function(model){
     model.request = req;

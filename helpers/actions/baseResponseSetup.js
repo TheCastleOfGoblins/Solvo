@@ -7,6 +7,7 @@ function act (model, callback, finalCallback) {
     searches : {},
     weather: {},
     contactForm : false,
+    subActions : [],
     raw : model.raw
   }
   callback(model);
