@@ -105,7 +105,9 @@ router.get('/', function(req, res, next) {
 
       var templateParameters = {
         'title':"Solvo Homepage",
-        'todos':todos
+        'pageTitle': "Solvo Tasks",
+        'todos':todos,
+        'username': req.session.passport.user.name
       }
       db.close();
 
