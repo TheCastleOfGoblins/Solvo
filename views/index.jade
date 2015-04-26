@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  script(src='/js/manageToDos.js')
   div(class="row")
     div(class="col-md-1")
     div(class="col-md-6 col-md-push-2")
@@ -10,9 +11,9 @@ block content
             | I have something to do now... :
           textarea(rows="5",class="form-control",id="to-do",placeholder="Just tell us what you want to do and we will help.")
         div(class="text-center")
-          button(type="submit",class="btn btn-primary")
+          button(type="submit", id='helpMe',class="btn btn-primary")
             | Help me with this!
-          button(type="submit",class="btn btn-info")
+          button(id='submitToDo', type="submit",class="btn btn-info")
             | Save for later
     div(class="col-md-1")
   div(class="row")
@@ -23,25 +24,23 @@ block content
           | Stuff I have to do.
           a(href="#",target="_modal",data-toggle="modal",data-target="#myModal")
             | See all tasks
-      table(class="table table-condensed table-hover")
-        thead
-          tr
-            th
-              | Task:
-            th
-              | Options
-            th
-        tbody
-        each item in todos
-          tr(id='#{item._id}')
-            td
-              | #{item.rawText}
-            td
-              button(class="help btn btn-sm" text="Help")
-                |Help!
-            td
-              div(class="checkbox")
-                input(type="checkbox")
+
+
+        div(class="row")
+          div(class="col-md-1")
+          each item in todos
+            div(id='#{item._id}' class="col-md-2")
+              div(class="row")
+                | #{item.rawText}
+                .contacts
+              div(class="row")
+                div(class="col-md-10")
+                  button(class="help btn btn-sm" text="Help")
+                    |Help!
+                div(class="col-md-2")
+                  div(class="checkbox")
+                    input(type="checkbox" class='resolve')
+          div(class="col-md-1")
 
     div(class="col-md-1")
   div(class="row")
@@ -99,13 +98,14 @@ block content
           | task.
         iframe(width="100%",height="250",frameborder="0",style="border:0",src="https://www.google.com/maps/embed/v1/place?q=Sofia%20NDK&key=AIzaSyBHGpzUbuMA_LU4jrOikW_EEhIyXpVA2ZU")
     div(class="col-md-1")
+
   div(class="row")
     div(class="col-md-10 col-md-offset-1 text-center")
       br
-      | Was this autohelp usefull? You can see all 
+      | Was this autohelp usefull? You can see all
       a(href="#",target="_modal")
         | autohelp
-      | for your 
+      | for your
       a(href="#" target="_modal")
         | upcomming tasks
 

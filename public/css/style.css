@@ -153,3 +153,7 @@ a:hover{
 div.text-center button{
 	margin-right: 10px;
 }
+
+td {
+    padding: 7px;
+}

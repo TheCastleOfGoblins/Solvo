@@ -97,30 +97,19 @@ router.get('/', function(req, res, next) {
 
 	var model = posApi.syntaxAnalysis("find a restaurant to go with Kosta");
 
-  format.run(model,function(model){
-    model.request = req;
-    model.location = {
-      lat : 42.6930319,
-      lon : 23.3206504
-    }
-    model.time = new Date();
-    
-    var Todo = require('../models/todo');
-    actions.run(model,function(model){
-      console.log(model);
-      dbApi.openConnection(function(db){
-        Todo.find({"userId":req.session.passport.user._id}).limit(5).exec(function(err,todos){
-          
-          var templateParameters = {
-            'title':"Solvo Homepage",
-            'pageTitle':"Home",
-            'username':req.session.passport.user.username,
-            'todos':todos
-          }
-          db.close();
-          res.render('index', templateParameters);
-        });
-      });
+ 
+  var Todo = require('../models/todo');
+  
+  dbApi.openConnection(function(db){
+    Todo.find({"userId":req.session.passport.user._id}).limit(5).exec(function(err,todos){
+      
+      var templateParameters = {
+        'title':"Solvo Homepage",
+        'todos':todos
+      }
+      db.close();
+      console.log(todos);
+      res.render('index', templateParameters);
     });
   });
     /*openStreetMapsApi.find("amenity","bar",42.6930319,23.3206504,function(err,data){
